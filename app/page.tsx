@@ -1,7 +1,6 @@
 // app/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import ThemeToggle from '@/app/components/ui/theme_toggle'
 
 export const metadata: Metadata = {
   title: 'Manvir Heer | Under Construction',
@@ -19,14 +18,11 @@ export const metadata: Metadata = {
 };
 
 export default function UnderConstruction() {
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24">
+    <main className="flex min-h flex-col items-center justify-center p-2 md:p-4">
       <div className="w-full max-w-5xl flex flex-col items-center">
-        {/* Theme toggle in top right corner */}
-        <div className="fixed top-6 right-6">
-          <ThemeToggle />
-        </div>
-        
         {/* Logo */}
         <div className="mb-12">
           <Image 
@@ -37,19 +33,15 @@ export default function UnderConstruction() {
             className="w-16 h-16"
           />
         </div>
-        
-        {/* Main title */}
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 text-center">
-          MANVIR HEER
-        </h1>
+    
         
         {/* Under construction message */}
-        <p className="text-xl md:text-2xl mb-8 text-center">
+        <p className="text-xl md:text-2xl mb-8 text-center font-sans">
           Portfolio website under construction
         </p>
         
         {/* Expected launch */}
-        <p className="text-lg opacity-70 mb-16 text-center">
+        <p className="text-lg opacity-90 mb-16 text-center font-sans">
           Coming soon
         </p>
         
@@ -57,7 +49,7 @@ export default function UnderConstruction() {
         <div className="mt-auto">
           <p className="text-sm opacity-60">
             <a href="#" className="hover:opacity-100 transition-opacity duration-300">
-              manvirheer007 [at] gmail.com
+              me [at] manvirheer.com
             </a>
           </p>
         </div>

@@ -5,6 +5,7 @@
 :root {
   --white: #ffffff;
   --black: #000000;
+  --dark-bg: #1e1e1e;
   --grey-5: #f2f2f2;
   --grey-10: #e6e6e6;
   --grey-20: #cccccc;
@@ -13,19 +14,28 @@
   --grey-50: #808080;
   --grey-60: #666666;
   --grey-70: #4d4d4d;
-  --grey-80: #333333;
+  --grey-80: #292929;
   --grey-90: #1a1a1a;
-  
+
   /* Animation variables */
   --easingOut: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Font weights */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
 }
 
 /* Theme variables that will be used by Tailwind and our components */
 @theme {
+
   /* Fonts */
-  --font-sans: var(--font-buongiorno), system-ui, sans-serif;
-  --font-mono: var(--font-tan-pearl), monospace;
-  
+  --font-sans: var(--font-host), system-ui, sans-serif;
+  --font-mono: monospace;
+
   /* Light mode as default theme */
   --page-bg: var(--white);
   --page-text: var(--grey-80);
@@ -47,7 +57,7 @@
 
 /* Dark mode theme variables */
 body.dark-mode {
-  --page-bg: var(--black);
+  --page-bg: var(--dark-bg);
   --page-text: var(--white);
   --page-border: var(--grey-70);
   --page-active: var(--grey-30);
@@ -89,13 +99,59 @@ body.mono-mode {
 body {
   background-color: var(--page-bg);
   color: var(--page-text);
-  transition: 
+  transition:
     background-color 0.4s var(--easingOut),
     color 0.4s var(--easingOut),
     border-color 0.4s var(--easingOut);
+  font-family: system-ui, sans-serif;
   font-size: 14px;
   line-height: 114%;
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+.font-light {
+  font-weight: var(--weight-light);
+}
+
+.font-regular {
+  font-weight: var(--weight-regular);
+}
+
+.font-medium {
+  font-weight: var(--weight-medium);
+}
+
+.font-semibold {
+  font-weight: var(--weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--weight-bold);
+}
+
+.font-extrabold {
+  font-weight: var(--weight-extrabold);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.svg-container {
+  transform: translateY(5px);
+}
+
+.animate-letter {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.animate-letter.hidden {
+  opacity: 0;
+}
+
+.animate-letter.visible {
+  opacity: 1;
 }
