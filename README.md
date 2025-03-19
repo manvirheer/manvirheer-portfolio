@@ -13,11 +13,11 @@ This is my personal portfolio website, accessible at [manvirheer.com](https://ma
 - Buongiorno Rastellino
 - TAN Pearl
 
-## Project Status
+## Project Status (~Journall)
 
 This is my personal portfolio website which is long overdue. I would like to have a central place to showcase all my projects which are not properly cataloged. And, hopefully one day I can start doing written blogs on my journey. 
 
-### Creating a base
+### Creating a base - March 18
 - ✅ Project initialized with Next.js
 - ✅ Domain Purchase
 - ✅ GitHub repository setup
@@ -25,10 +25,12 @@ This is my personal portfolio website which is long overdue. I would like to hav
 - ✅ Typography selection
 - ✅ Basic documentation
 
-### Planning Routing and DevOps
-- Next steps are to plan the routing of the application.
-- Have a underconstruction page 
-- Deploy this version until the website is being made
+### Planning Routing and DevOps - March 18
+- ✅ Next steps are to plan the routing of the application.
+- ✅ Have a underconstruction page 
+    - I completed the setup at AWS and Cloudfare. Main branch will automatically trigger the building and deployment. Hopefully, in future, we start working on some more custom stuff in this domain in order to make our website load faster. For now, no premature optimizations.
+- ✅ Deploy this version until the website is being made
+    - I was able to deploy to manvirheer.com. I will probably keep this as a sep branch in case I need it in future. 
 
 ### Draft the design philosphy  
 - Create a foundation for design philosophy
