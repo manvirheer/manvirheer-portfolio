@@ -10,8 +10,7 @@ This is my personal portfolio website, accessible at [manvirheer.com](https://ma
 
 ## Typography
 
-- Buongiorno Rastellino
-- TAN Pearl
+- Host Grotesk
 
 ## Project Status (~Journall)
 
