@@ -1,6 +1,7 @@
 // app/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import ThemeToggle from '@/app/components/ui/theme_toggle'
 
 export const metadata: Metadata = {
   title: 'Manvir Heer | Under Construction',
@@ -19,8 +20,13 @@ export const metadata: Metadata = {
 
 export default function UnderConstruction() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24 bg-white text-gray-800">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24">
       <div className="w-full max-w-5xl flex flex-col items-center">
+        {/* Theme toggle in top right corner */}
+        <div className="fixed top-6 right-6">
+          <ThemeToggle />
+        </div>
+        
         {/* Logo */}
         <div className="mb-12">
           <Image 
@@ -50,7 +56,7 @@ export default function UnderConstruction() {
         {/* Contact info */}
         <div className="mt-auto">
           <p className="text-sm opacity-60">
-            <a href='#' className="hover:opacity-100 transition-opacity">
+            <a href="#" className="hover:opacity-100 transition-opacity duration-300">
               manvirheer007 [at] gmail.com
             </a>
           </p>
