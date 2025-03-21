@@ -48,7 +48,7 @@ export default function UnderConstruction() {
         <div className="mt-auto">
           <p className="text-sm opacity-60">
             <a href="#" className="hover:opacity-100 transition-opacity duration-300">
-              me [at] manvirheer.com
+              hi [at] manvirheer.com
             </a>
           </p>
         </div>
