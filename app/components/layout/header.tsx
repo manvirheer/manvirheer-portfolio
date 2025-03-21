@@ -14,8 +14,7 @@ const Header = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [platform, setPlatform] = useState('');
   const [isLogoHovered, setIsLogoHovered] = useState(false);
-  // Default fontSize now just a state variable that will be dynamically updated
-  const [fontSize, setFontSize] = useState('160px');
+  // No need for fontSize state when using CSS vw units
   const letterControls = useAnimation();
   const logoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadDone = useRef(false);
@@ -42,40 +41,17 @@ const Header = () => {
       return 'Unknown';
     };
 
-    // Improved font size calculation based on viewport width
-    const updateFontSize = () => {
-      const width = window.innerWidth;
-      
-      // More granular breakpoints for smoother scaling
-      if (width >= 1440) {
-        setFontSize('210px'); // Largest size for wide screens
-      } else if (width >= 1280) {
-        setFontSize('180px'); // Slightly smaller for standard desktop
-      } else if (width >= 1024) {
-        setFontSize('160px'); // Medium large for smaller desktops
-      } else if (width >= 768) {
-        setFontSize('140px');  // Medium size for tablets
-      } else if (width >= 640) {
-        setFontSize('110px');  // Medium-small for large phones
-      } else if (width >= 480) {
-        setFontSize('60px');  // Small for medium phones
-      } else {
-        setFontSize('40px');  // Extra small for small phones
-      }
-    };
+    // No need for JavaScript-based font size calculation with vw units
 
     // Initialize
-    updateFontSize();
     updateDimensions();
     setPlatform(detectPlatform());
 
-    // Add event listeners
+    // Add event listener
     window.addEventListener('resize', updateDimensions);
-    window.addEventListener('resize', updateFontSize);
 
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      window.removeEventListener('resize', updateFontSize);
     };
   }, []);
 
@@ -136,7 +112,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`w-full py-2 px-4  ${fonts.host.variable}`}>
+    <header className={`w-full py-2 px-2  ${fonts.host.variable}`}>
       {/* Main content container */}
       <div className="w-full">
         {/* Text with Framer Motion animations */}
@@ -157,7 +133,7 @@ const Header = () => {
                     display: 'flex', 
                     fontFamily: 'var(--font-host)',
                     fontWeight: 900,
-                    fontSize: fontSize, // Now using the dynamic fontSize state
+                    fontSize: 'clamp(40px, 12.20vw, 170px)',  // 14.58vw = 210px at 1440px viewport width
                     letterSpacing: '-.005em',
                     lineHeight: '0.9',
                     color: 'currentColor'
@@ -231,7 +207,7 @@ const Header = () => {
                     display: 'flex', 
                     fontFamily: 'var(--font-host)',
                     fontWeight: 900,
-                    fontSize: fontSize, // Now using the dynamic fontSize state
+                    fontSize: 'clamp(40px, 12.20vw, 170px)', // 14.58vw = 210px at 1440px viewport width
                     letterSpacing: '-0.03em',
                     lineHeight: '0.9',
                     color: 'currentColor'

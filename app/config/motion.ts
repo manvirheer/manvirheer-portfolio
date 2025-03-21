@@ -17,7 +17,7 @@ export const smoothEase = [0.25, 1, 0.5, 1];
 const LETTER_STAGGER_DELAY = 0.02;    // Delay between each letter's animation
 const LETTER_ANIMATION_DURATION = 0.2; // Duration of each letter's animation
 const LETTERS_HIDE_DELAY = 1500;       // Time before letters start to disappear (4 seconds)
-const LETTERS_HOVER_DURATION = 0.3;    // Duration for hover animation of letters
+const LETTERS_HOVER_DURATION = 0.2;    // Duration for hover animation of letters
 
 // Logo letter animations
 export const headerLetterVariants = {
@@ -46,7 +46,7 @@ export const headerLetterVariants = {
     transition: {
       delay: custom * LETTER_STAGGER_DELAY,
       duration: LETTERS_HOVER_DURATION,
-      ease: ease
+       ease: smoothEase
     }
   })
 };
