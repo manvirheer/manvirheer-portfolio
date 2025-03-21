@@ -1,6 +1,5 @@
 // app/page.tsx
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Manvir Heer | Under Construction',

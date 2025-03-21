@@ -1,5 +1,3 @@
-import { head } from "framer-motion/m";
-
 // app/config/content.ts (updated)
 export const header_characters = {
     // M - Always visible
