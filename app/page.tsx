@@ -21,9 +21,9 @@ export default function UnderConstruction() {
 
 
   return (
-    <main className="flex min-h flex-col items-center justify-center p-2 md:p-4">
+    <main className=" flex min-h-auto flex-col items-center justify-center mt-34 md:p-4">
       <div className="w-full max-w-5xl flex flex-col items-center">
-        {/* Logo */}
+        {/* Logo
         <div className="mb-12">
           <Image 
             src="/logo/logo.png" 
@@ -32,7 +32,7 @@ export default function UnderConstruction() {
             height={64} 
             className="w-16 h-16"
           />
-        </div>
+        </div> */}
     
         
         {/* Under construction message */}

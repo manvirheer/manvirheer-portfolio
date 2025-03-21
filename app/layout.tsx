@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/app/context/theme-context";
 import { fonts } from "@/app/config/fonts";
-import Header from "@/app/components/layout/Header";
+import Header from "@/app/components/layout/header";
 import "@/app/styles/globals.css";
 
 export const metadata: Metadata = {
