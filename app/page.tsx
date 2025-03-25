@@ -1,5 +1,6 @@
 // app/page.tsx
 import type { Metadata } from 'next';
+import UnderConstructionTape from './components/home/underconstruction';
 
 export const metadata: Metadata = {
   title: 'Manvir Heer | Under Construction',
@@ -31,9 +32,9 @@ export default function UnderConstruction() {
             height={64} 
             className="w-16 h-16"
           />
-        </div> */}
-    
-        
+    //     </div> */}
+
+{/*         
         {/* Under construction message */}
         <p className="text-xl md:text-2xl mb-8 text-center font-sans">
           Portfolio website under construction
@@ -50,7 +51,7 @@ export default function UnderConstruction() {
             <a href="#" className="hover:opacity-100 transition-opacity duration-300">
               hi [at] manvirheer.com
             </a>
-          </p>
+          </p> 
         </div>
       </div>
     </main>
