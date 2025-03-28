@@ -14,7 +14,6 @@ const Header = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [platform, setPlatform] = useState('');
   const [isLogoHovered, setIsLogoHovered] = useState(false);
-  // No need for fontSize state when using CSS vw units
   const letterControls = useAnimation();
   const logoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialLoadDone = useRef(false);
@@ -22,12 +21,9 @@ const Header = () => {
   // Get window dimensions and platform on client side
   useEffect(() => {
     const updateDimensions = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
       setDimensions({
-        width,
-        height
+        width: window.innerWidth,
+        height: window.innerHeight
       });
     };
 
@@ -40,8 +36,6 @@ const Header = () => {
       if (userAgent.indexOf('iPhone') !== -1 || userAgent.indexOf('iPad') !== -1) return 'iOS';
       return 'Unknown';
     };
-
-    // No need for JavaScript-based font size calculation with vw units
 
     // Initialize
     updateDimensions();
@@ -72,184 +66,111 @@ const Header = () => {
     return () => {
       if (logoTimeoutRef.current) {
         clearTimeout(logoTimeoutRef.current);
-        logoTimeoutRef.current = null;
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Run only once on mount
 
   // Handle hover state changes
   useEffect(() => {
     // Don't react to hover state changes until after initial load is done
-    if (initialLoadDone.current) {
-      if (isLogoHovered) {
-        letterControls.start('hover');
-
-        // Clear any existing timeout to prevent hiding during hover
-        if (logoTimeoutRef.current) {
-          clearTimeout(logoTimeoutRef.current);
-          logoTimeoutRef.current = null;
-        }
-      } else {
-        // When no longer hovering, hide the letters again
-        letterControls.start('hidden');
+    if (!initialLoadDone.current) return;
+    
+    if (isLogoHovered) {
+      letterControls.start('hover');
+      
+      // Clear any existing timeout
+      if (logoTimeoutRef.current) {
+        clearTimeout(logoTimeoutRef.current);
+        logoTimeoutRef.current = null;
       }
+    } else {
+      // When no longer hovering, hide the letters again
+      letterControls.start('hidden');
     }
   }, [isLogoHovered, letterControls]);
-
-  // Hover effect for logo
-  const handleLogoHover = () => {
-    setIsLogoHovered(true);
-  };
-
-  const handleLogoLeave = () => {
-    setIsLogoHovered(false);
-  };
 
   // Toggle dark mode
   const handleThemeToggle = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  // Text style for consistent rendering
+  const logoTextStyle = {
+    display: 'flex', 
+    fontFamily: 'var(--font-host)',
+    fontWeight: 900,
+    fontSize: 'clamp(40px, 12.20vw, 170px)',
+    letterSpacing: '-0.03em',
+    lineHeight: '0.9',
+    color: 'currentColor'
+  };
+
+  // Create letter components to avoid repetition
+  const Letter = ({ 
+    letter, 
+    animate = true, 
+    customDelay = 0 
+  }: { 
+    letter: string; 
+    animate?: boolean; 
+    customDelay?: number;
+  }) => {
+    return animate ? (
+      <motion.span
+        variants={headerLetterVariants}
+        animate={letterControls}
+        custom={customDelay}
+        style={{ display: 'inline-block' }}
+      >
+        {letter}
+      </motion.span>
+    ) : (
+      <motion.span
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
+        style={{ display: 'inline-block' }}
+      >
+        {letter}
+      </motion.span>
+    );
+  };
+
   return (
-    <header className={`w-full py-2 px-2  ${fonts.host.variable}`}>
-      {/* Main content container */}
+    <header className={`w-full py-2 px-2 ${fonts.host.variable}`}>
       <div className="w-full">
-        {/* Text with Framer Motion animations */}
+        {/* Logo container */}
         <div
           className="text-container w-full"
           style={{
             cursor: 'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="black"/></svg>\') 10 10, auto',
           }}
-          onMouseEnter={handleLogoHover}
-          onMouseLeave={handleLogoLeave}
+          onMouseEnter={() => setIsLogoHovered(true)}
+          onMouseLeave={() => setIsLogoHovered(false)}
         >
           <div className="w-full">
             <div className="grid grid-cols-12">
+              {/* MANVIR */}
               <div className="col-span-6 md:col-span-6">
                 <div className="flex justify-start">
-                  {/* MANVIR text with individual letter animations */}
-                  <div style={{ 
-                    display: 'flex', 
-                    fontFamily: 'var(--font-host)',
-                    fontWeight: 900,
-                    fontSize: 'clamp(40px, 12.20vw, 170px)',  // 14.58vw = 210px at 1440px viewport width
-                    letterSpacing: '-.005em',
-                    lineHeight: '0.9',
-                    color: 'currentColor'
-                  }}>
-                    {/* M - Always visible */}
-                    <motion.span
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: 1 }}
-                      style={{ display: 'inline-block' }}
-                    >
-                      M
-                    </motion.span>
-                    
-                    {/* A - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={1}
-                      style={{ display: 'inline-block' }}
-                    >
-                      A
-                    </motion.span>
-                    
-                    {/* N - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={2}
-                      style={{ display: 'inline-block' }}
-                    >
-                      N
-                    </motion.span>
-                    
-                    {/* V - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={3}
-                      style={{ display: 'inline-block' }}
-                    >
-                      V
-                    </motion.span>
-                    
-                    {/* I - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={4}
-                      style={{ display: 'inline-block' }}
-                    >
-                      I
-                    </motion.span>
-                    
-                    {/* R - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={5}
-                      style={{ display: 'inline-block' }}
-                    >
-                      R
-                    </motion.span>
+                  <div style={logoTextStyle}>
+                    <Letter letter="M" animate={false} />
+                    <Letter letter="A" customDelay={1} />
+                    <Letter letter="N" customDelay={2} />
+                    <Letter letter="V" customDelay={3} />
+                    <Letter letter="I" customDelay={4} />
+                    <Letter letter="R" customDelay={5} />
                   </div>
                 </div>
               </div>
               
+              {/* HEER */}
               <div className="col-span-6 md:col-span-6">
                 <div className="flex justify-start md:justify-start">
-                  {/* HEER text with individual letter animations */}
-                  <div style={{ 
-                    display: 'flex', 
-                    fontFamily: 'var(--font-host)',
-                    fontWeight: 900,
-                    fontSize: 'clamp(40px, 12.20vw, 170px)', // 14.58vw = 210px at 1440px viewport width
-                    letterSpacing: '-0.03em',
-                    lineHeight: '0.9',
-                    color: 'currentColor'
-                  }}>
-                    {/* H - Always visible */}
-                    <motion.span
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: 1 }}
-                      style={{ display: 'inline-block' }}
-                    >
-                      H
-                    </motion.span>
-                    
-                    {/* E - Animated (first E) */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={7}
-                      style={{ display: 'inline-block' }}
-                    >
-                      E
-                    </motion.span>
-                    
-                    {/* E - Animated (second E) */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={8}
-                      style={{ display: 'inline-block' }}
-                    >
-                      E
-                    </motion.span>
-                    
-                    {/* R - Animated */}
-                    <motion.span
-                      variants={headerLetterVariants}
-                      animate={letterControls}
-                      custom={9}
-                      style={{ display: 'inline-block' }}
-                    >
-                      R
-                    </motion.span>
+                  <div style={logoTextStyle}>
+                    <Letter letter="H" animate={false} />
+                    <Letter letter="E" customDelay={7} />
+                    <Letter letter="E" customDelay={8} />
+                    <Letter letter="R" customDelay={9} />
                   </div>
                 </div>
               </div>
@@ -257,7 +178,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Use the Navigation component */}
+        {/* Navigation */}
         <Navigation
           dimensions={dimensions}
           platform={platform}
