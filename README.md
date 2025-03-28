@@ -12,11 +12,12 @@ This is my personal portfolio website, accessible at [manvirheer.com](https://ma
 
 - Host Grotesk
 
-## Project Status (~Journall)
+## Project Status (~Journal)
 
-This is my personal portfolio website which is long overdue. I would like to have a central place to showcase all my projects which are not properly cataloged. And, hopefully one day I can start doing written blogs on my journey. 
+This is my personal portfolio website which is long overdue. I would like to have a central place to showcase all my projects which are not properly cataloged. And, hopefully one day I can start doing written blogs on my journey.
 
 ### Creating a base - March 18
+
 - ✅ Project initialized with Next.js
 - ✅ Domain Purchase
 - ✅ GitHub repository setup
@@ -25,20 +26,30 @@ This is my personal portfolio website which is long overdue. I would like to hav
 - ✅ Basic documentation
 
 ### Planning Routing and DevOps - March 18
-- ✅ Next steps are to plan the routing of the application.
-- ✅ Have a underconstruction page 
-    - I completed the setup at AWS and Cloudfare. Main branch will automatically trigger the building and deployment. Hopefully, in future, we start working on some more custom stuff in this domain in order to make our website load faster. For now, no premature optimizations.
-- ✅ Deploy this version until the website is being made
-    - I was able to deploy to manvirheer.com. I will probably keep this as a sep branch in case I need it in future. 
 
-### Draft the design philosphy  
+- ✅ Next steps are to plan the routing of the application.
+- ✅ Have a under construction page
+    - I completed the setup at AWS and Cloudflare. Main branch will automatically trigger the building and deployment. Hopefully, in future, we start working on some more custom stuff in this domain in order to make our website load faster. For now, no premature optimizations.
+- ✅ Deploy this version until the website is being made
+    - I was able to deploy to manvirheer.com. I will probably keep this as a sep branch in case I need it in future.
+
+### Draft the design philosophy
+
 - Create a foundation for design philosophy
 - Find Design Inspirations
 - Define theme for the application
 
+**Design Inspirations:**
+- [https://katherine-le.com/](https://katherine-le.com/)
+- [harryjatkins](https://harryjatkins.com/)
+
 ## Libraries
 
-*(To be added as development progresses)*
+- Framer-Motion
+
+## Other Documentation
+
+- **Next.js App Router Documentation**: [https://github.com/manvirheer/manvirheer-portfolio/blob/main/docs/Routing.md](https://github.com/manvirheer/manvirheer-portfolio/blob/main/docs/Routing.md)
 
 ## Commit Guidelines
 
@@ -61,7 +72,7 @@ When contributing to this repository, please follow these commit message convent
 
 ```bash
 # Clone the repository
-git clone https://github.com/manvirheer/manvirheer-portfolio.git
+git clone [https://github.com/manvirheer/manvirheer-portfolio.git](https://github.com/manvirheer/manvirheer-portfolio.git)
 
 # Navigate to the project
 cd manvirheer-portfolio
