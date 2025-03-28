@@ -11,10 +11,36 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
   className = ''
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Function to check and update mobile status
+    const checkMobileStatus = () => {
+      // Typically, tablets and larger screens are considered non-mobile
+      // You can adjust these breakpoints as needed
+      setIsMobile(window.innerWidth < 768); // 768px is a common tablet breakpoint
+    };
+
+    // Check initial status
+    checkMobileStatus();
+
+    // Add event listener to handle window resizing
+    window.addEventListener('resize', checkMobileStatus);
+
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('resize', checkMobileStatus);
+    };
+  }, []);
 
   const handleLoad = () => {
     setIsLoaded(true);
   };
+
+  // If it's a mobile device, don't render Spline at all
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div 
