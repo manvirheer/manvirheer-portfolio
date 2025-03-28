@@ -19,27 +19,37 @@ export const metadata: Metadata = {
 
 export default function UnderConstruction() {
   return (
-    <> <Header />
-    <div className="w-full max-w-5xl flex flex-col items-center justify-center text-center">
-      {/* Under construction message */}
-      <p className="text-xl md:text-2xl mb-8 font-sans">
-        Portfolio website under construction
-      </p>
-
-      {/* Expected launch */}
-      <p className="text-lg opacity-90 mb-16 font-sans">
-        Coming soon
-      </p>
-
-      {/* Contact info */}
-      <div className="mt-auto">
-        <p className="text-sm opacity-60">
-          <a href="#" className="hover:opacity-100 transition-opacity duration-300">
-            hi [at] manvirheer.com
-          </a>
+    <div className="antialiased w-screen min-h-screen flex flex-col">
+      {/* Ensure Header takes up space */}
+      <Header />
+     
+      <div className="w-full max-w-5xl flex flex-col items-center justify-center text-center h-screen mx-auto">
+        {/* Under construction message */}
+        <p className="text-xl md:text-2xl mb-8 font-sans justify-center mx-auto">
+          Portfolio website under construction
         </p>
+
+        {/* Expected launch */}
+        <p className="text-lg opacity-90 mb-16 font-sans">
+          Coming soon
+        </p>
+
+        {/* Contact info */}
+        <div className="">
+          <p className="text-sm opacity-60">
+            <a href="#" className="hover:opacity-100 transition-opacity duration-300">
+              hi [at] manvirheer.com
+            </a>
+          </p>
+        </div>
       </div>
+      {/* Footer stays at the bottom */}
+      <footer className="border-t border-page-border py-6">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 text-sm text-page-footer">
+          <p>© {new Date().getFullYear()} Manvir Heer. All rights reserved.</p>
+        </div>
+      </footer>
+
     </div>
-    </>
   );
 }
