@@ -55,7 +55,7 @@ const Overview = ({ onNavigateToTab }: OverviewProps) => {
         variants={itemVariants}
       >
         <div className="md:flex relative z-10">
-          <div className="md:w-4/5 p-8 md:p-10">
+          <div className="md:w-3/5 p-8 md:p-10">
             {/* Existing content */}
             <div className="inline-block px-3 py-1.5 bg-blue-100 rounded-full text-sm font-medium text-blue-800 mb-6">
               Strategic Passenger Engagement Initiative
