@@ -39,7 +39,7 @@ const Navigation = ({ dimensions, platform, theme, onThemeToggle }: NavigationPr
       {/* Main navigation - hidden on small screens when menu is closed */}
       <div className={`grid grid-cols-12 ${mobileMenuOpen ? 'block' : 'hidden'} md:grid`}>
         {/* Left column - Independent Developer (3 cols) */}
-        <div className="col-span-12 md:col-span-3 text-left mb-4 md:mb-0">
+        <div className="col-span-12 md:col-span-3 text-left md:mb-0">
           <p>Independent</p>
           <p className="pt-1">Developer</p>
         </div>
@@ -57,20 +57,20 @@ const Navigation = ({ dimensions, platform, theme, onThemeToggle }: NavigationPr
             </motion.p>
             <motion.p whileHover={linkHover} className="pt-1">
               <Link
-                href="/projects"
+                href="/yvr"
                 className={`hover:underline ${pathname === '/projects' ? 'font-medium' : ''}`}
               >
-                Projects
+                YVR Explorer
               </Link>
             </motion.p>
-            <motion.p whileHover={linkHover} className="pt-1">
+            {/* <motion.p whileHover={linkHover} className="pt-1">
               <Link
                 href="/about"
                 className={`hover:underline ${pathname === '/about' ? 'font-medium' : ''}`}
               >
                 About
               </Link>
-            </motion.p>
+            </motion.p> */}
           </div>
         </div>
 

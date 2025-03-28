@@ -34,6 +34,7 @@
 
   /* Fonts */
   --font-sans: var(--font-host), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), serif;
   --font-mono: monospace;
 
   /* Light mode as default theme */
@@ -138,6 +139,10 @@ body {
 
 .font-sans {
   font-family: var(--font-sans);
+}
+
+.font-playfair {
+  font-family: var(--font-serif);
 }
 
 .svg-container {

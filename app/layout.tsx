@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/app/context/theme-context";
 import { fonts } from "@/app/config/fonts";
-import Header from "@/app/components/layout/header";
 import "@/app/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -39,15 +38,20 @@ export default function RootLayout({
     <html lang="en" className={fontClasses}>
       <ThemeProvider>
         <body className="antialiased min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-grow">
+          {/* Ensure Header takes up space */}
+         
+
+          {/* Main content takes remaining space */}
+          <main className="flex-1 flex items-center justify-center w-full">
             {children}
           </main>
-          <footer className="border-t border-page-border py-6">
+
+          {/* Footer stays at the bottom */}
+          {/* <footer className="border-t border-page-border py-6">
             <div className="w-full max-w-7xl mx-auto px-4 md:px-8 text-sm text-page-footer">
               <p>© {new Date().getFullYear()} Manvir Heer. All rights reserved.</p>
             </div>
-          </footer>
+          </footer> */}
         </body>
       </ThemeProvider>
     </html>

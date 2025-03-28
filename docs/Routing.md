@@ -2,7 +2,7 @@
 
 ## Introduction to Next.js App Router
 
-Next.js 13+ introduced the App Router. In this architecture, every folder represents a route segment and a `page.tsx` file within a folder makes that route publicly accessible.
+Next.js 13+ introduced the App Router. In this architecture, every folder inside the `app` directory represents a route segment. A `page.tsx` file within a route segment makes that route publicly accessible.
 
 ## Project Routes Structure
 ```
@@ -27,46 +27,53 @@ app/
 ## Route Specifications
 
 ### Home Page (`/`)
-- Primary landing page
-- Minimalist design featuring typography-focused introduction
-- Potentially featuring a large name display similar to the Harry Atkins site
-- Brief introduction
+
+- Primary landing page.
+- Minimalist design featuring a typography-focused introduction.
+- Potentially featuring a large name display, similar to the Harry Atkins site.
+- Includes a brief introductory section.
 
 ### Information Page (`/information`)
-- Personal details and background
-- Contact form for professional inquiries
-- Location and availability information
-- Design philosophy or personal manifesto
+
+- Contains personal details and background information.
+- Features a contact form for professional inquiries.
+- Provides location and availability information.
+- May include a design philosophy or personal manifesto.
 
 ### Projects Page (`/projects`)
-- Grid layout of portfolio projects
-- Each project will have:
-  - Thumbnail image
-  - Project title
-  - Brief description
-  - Technology/tools used
+
+- Displays a grid layout of portfolio projects.
+- Each project item will include:
+    - A thumbnail image.
+    - The project title.
+    - A brief description.
+    - The technologies or tools used.
 
 ### Project Detail Page (`/projects/[slug]`)
-- Dynamic route for individual project pages
-- In-depth case study format
-- Process documentation
-- Images and potentially videos
-- Outcomes and learnings
+
+- Serves as a dynamic route for individual project pages.
+- Will follow an in-depth case study format.
+- Includes process documentation.
+- Features images and potentially videos.
+- Outlines outcomes and learnings from the project.
 
 ### Timeline Page (`/timeline`) - *Future Implementation*
-- Horizontal scrolling timeline
-- Professional and educational milestones
-- Potentially interactive elements
-- Visual representation of career progression
+
+- Will feature a horizontal scrolling timeline.
+- Will showcase professional and educational milestones.
+- May include interactive elements.
+- Aims to provide a visual representation of career progression.
 
 ### Writings Page (`/writings`) - *Future Implementation*
-- Blog-style layout for articles
-- Categories or tags for content organization
-- Date published information
-- Reading time estimates
+
+- Will have a blog-style layout for articles.
+- Will include categories or tags for content organization.
+- Will display the date each article was published.
+- May provide reading time estimates.
 
 ### Writing Detail Page (`/writings/[slug]`) - *Future Implementation*
-- Dynamic route for individual blog posts
-- Rich text formatting
-- Code snippets (if technical)
-- Related articles
+
+- Will be a dynamic route for individual blog posts.
+- Will support rich text formatting.
+- Will allow for the inclusion of code snippets (if the post is technical).
+- May suggest related articles.
