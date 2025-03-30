@@ -16,7 +16,7 @@ const Benefits = () => {
           <IconBox
             icon={<SparklesIcon className="h-7 w-7 text-blue-600" />}
             title="Enhanced Passenger Experience"
-            description="Transforms waiting time into engaging activities that demonstrably reduce perceived waiting time and stress. Implementation of similar gamification initiatives at international airports has resulted in passenger satisfaction increases of up to 35% during peak travel periods."
+            description="Turns waiting time into engaging activities that reduce perceived wait times and stress. Similar gamification projects at international airports have boosted passenger satisfaction by up to 35% during peak travel periods."
             variant="feature"
           >
             <div className="mt-5 bg-white rounded-md border border-gray-200 p-4 flex justify-between items-center">

@@ -35,23 +35,10 @@ export default function RootLayout({
   const fontClasses = useFontClasses();
   
   return (
-    <html lang="en" className={fontClasses}>
+    <html lang="en" className={`${fontClasses} overflow-x-hidden`}>
       <ThemeProvider>
-        <body className="antialiased min-h-screen flex flex-col">
-          {/* Ensure Header takes up space */}
-         
-
-          {/* Main content takes remaining space */}
-          <main className="flex-1 flex items-center justify-center w-full">
-            {children}
-          </main>
-
-          {/* Footer stays at the bottom */}
-          {/* <footer className="border-t border-page-border py-6">
-            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 text-sm text-page-footer">
-              <p>© {new Date().getFullYear()} Manvir Heer. All rights reserved.</p>
-            </div>
-          </footer> */}
+        <body className="antialiased min-h-screen flex flex-col overflow-x-hidden">
+          {children}
         </body>
       </ThemeProvider>
     </html>

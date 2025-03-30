@@ -2,14 +2,12 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navigation from '../layout/Navigation';
+import Navigation from '../../components/layout/yvr/Navigation';
 import Overview from './Overview';
 import Challenges from './Challenges';
 import Benefits from './Benefits';
 import Implementation from './Implementation';
 import Demo from './Demo';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
 
 // Define animation variants for tab content
 const tabContentVariants = {
@@ -48,82 +46,78 @@ const YVRExplorerProposal = () => {
   };
   
   return (
-    <div className="w-full min-h-screen relative">
-      <div className="max-w-full relative z-10">
-        <Header/>
-        <Navigation activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
-        
-        <main className="mx-auto px-2 md:px-4 lg:px-16 xl:px-24 py-10 md:py-12">
-          <AnimatePresence mode="wait">
-            {activeTab === 'overview' && (
-              <motion.div
-                key="overview"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={tabContentVariants}
-                className="max-w-7xl mx-auto"
-              >
-                <Overview onNavigateToTab={handleNavigateToTab} />
-              </motion.div>
-            )}
-            
-            {activeTab === 'challenges' && (
-              <motion.div
-                key="challenges"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={tabContentVariants}
-                className="max-w-7xl mx-auto"
-              >
-                <Challenges />
-              </motion.div>
-            )}
-            
-            {activeTab === 'benefits' && (
-              <motion.div
-                key="benefits"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={tabContentVariants}
-                className="max-w-7xl mx-auto"
-              >
-                <Benefits />
-              </motion.div>
-            )}
-            
-            {activeTab === 'implementation' && (
-              <motion.div
-                key="implementation"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={tabContentVariants}
-                className="max-w-7xl mx-auto"
-              >
-                <Implementation />
-              </motion.div>
-            )}
-            
-            {activeTab === 'demo' && (
-              <motion.div
-                key="demo"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={tabContentVariants}
-                className="max-w-7xl mx-auto"
-              >
-                <Demo />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </main>
-        <Footer />
+    <>
+      <Navigation activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
+      
+      <div className="mx-auto px-2 md:px-4 lg:px-16 xl:px-24 py-10 md:py-12">
+        <AnimatePresence mode="wait">
+          {activeTab === 'overview' && (
+            <motion.div
+              key="overview"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabContentVariants}
+              className="max-w-7xl mx-auto"
+            >
+              <Overview onNavigateToTab={handleNavigateToTab} />
+            </motion.div>
+          )}
+          
+          {activeTab === 'challenges' && (
+            <motion.div
+              key="challenges"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabContentVariants}
+              className="max-w-7xl mx-auto"
+            >
+              <Challenges />
+            </motion.div>
+          )}
+          
+          {activeTab === 'benefits' && (
+            <motion.div
+              key="benefits"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabContentVariants}
+              className="max-w-7xl mx-auto"
+            >
+              <Benefits />
+            </motion.div>
+          )}
+          
+          {activeTab === 'implementation' && (
+            <motion.div
+              key="implementation"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabContentVariants}
+              className="max-w-7xl mx-auto"
+            >
+              <Implementation />
+            </motion.div>
+          )}
+          
+          {activeTab === 'demo' && (
+            <motion.div
+              key="demo"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabContentVariants}
+              className="max-w-7xl mx-auto"
+            >
+              <Demo />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </>
   );
 };
 

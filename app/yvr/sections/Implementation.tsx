@@ -9,9 +9,7 @@ const Implementation = () => {
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 md:p-10">
         <h2 className="font-playfair text-2xl md:text-3xl font-bold text-gray-900 mb-5">Implementation Strategy</h2>
         <p className="font-sans text-lg text-gray-700 mb-8 leading-relaxed">
-          The YVR Explorer Challenge follows a structured implementation methodology designed to minimize operational
-          disruption while maximizing strategic impact. The approach aligns with YVR&apos;s project governance
-          framework and emphasizes stakeholder engagement throughout the process.
+        The YVR Explorer Challenge uses a structured implementation approach to minimize disruption while maximizing impact. This method aligns with YVR&apos;s project governance framework and engages stakeholders at every step.
         </p>
 
         <div className="bg-gray-50 rounded-lg border border-gray-200 p-8">

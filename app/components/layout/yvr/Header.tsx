@@ -56,6 +56,9 @@ const Header = () => {
               <p className="font-sans text-xs text-gray-500">
                 Simon Fraser University
               </p>
+              <p className="font-sans text-xs text-gray-500">
+                Applying for Co-Op Positions for Summer 2025
+              </p>
             </div>
           </div>
         </div>
