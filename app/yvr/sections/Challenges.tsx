@@ -77,7 +77,7 @@ const Challenges = () => {
           <ChallengeCategory
             icon={<MapIcon className="h-7 w-7 text-blue-600" />}
             title="Physical & Activity-Based"
-            description="Physical & Activity-Based Challenges encourage terminal exploration while optimizing passenger flow and reducing congestion at high-traffic areas. By incentivizing stair usage and exploration of less-utilized areas, these challenges contribute to operational efficiency and support YVR&apos;s sustainability goals through reduced elevator and escalator usage."
+            description="Physical & Activity-Based Challenges prompt travelers to explore the terminal. This optimizes passenger flow and reduces congestion in busy areas. The challenges reward stair usage and visits to less-busy areas. This approach improves operational efficiency and supports YVR's sustainability goals by reducing elevator and escalator usage."
             challenges={physicalChallenges}
           />
 

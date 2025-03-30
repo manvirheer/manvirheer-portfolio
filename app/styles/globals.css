@@ -31,7 +31,6 @@
 
 /* Theme variables that will be used by Tailwind and our components */
 @theme {
-
   /* Fonts */
   --font-sans: var(--font-host), system-ui, sans-serif;
   --font-serif: var(--font-playfair), serif;
@@ -40,7 +39,7 @@
   /* Light mode as default theme */
   --page-bg: var(--white);
   --page-text: var(--grey-80);
-  --page-border: var(--grey-10);
+  --page-border: var(--grey-30);
   --page-active: var(--grey-40);
   --page-inactive: var(--grey-30);
   --page-button-default: var(--grey-10);
@@ -110,8 +109,12 @@ body {
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+html {
+  overflow-x: hidden;
+}
 
 .font-light {
   font-weight: var(--weight-light);
@@ -159,4 +162,10 @@ body {
 
 .animate-letter.visible {
   opacity: 1;
+}
+
+/* Ensure no horizontal scroll */
+.max-w-2000 {
+  max-width: 2000px;
+  width: 100%;
 }

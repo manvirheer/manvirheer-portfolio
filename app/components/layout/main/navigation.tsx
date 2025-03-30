@@ -57,7 +57,7 @@ const Navigation = ({ dimensions, platform, theme, onThemeToggle }: NavigationPr
   );
   
   return (
-    <div className="border-t border-page-border py-2">
+    <div className="border-t border-page-border py-2 border-gray-200">
       {/* Mobile menu button - only visible on small screens */}
       <div className="md:hidden flex justify-end mb-2">
         <button 

@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { UserGroupIcon, ClockIcon } from '@heroicons/react/24/outline';
 import StatCard from '../ui/StatCard';
-import OverlaySpline from '../components/SplineBackground';
+import OverlaySpline from '../../components/yvr/SplineBackground';
 
 interface OverviewProps {
   onNavigateToTab: (tab: string) => void;
@@ -65,7 +65,7 @@ const Overview = ({ onNavigateToTab }: OverviewProps) => {
             </h1>
             <div className="space-y-4 mb-8">
               <p className="font-sans text-lg text-gray-700 leading-relaxed">
-                The YVR Explorer Challenge introduces an innovative passenger engagement platform designed to transform airport dwell time into valuable interactions that support Vancouver International Airport&apos;s key strategic initiatives.
+              The YVR Explorer Challenge offers a fresh approach to passenger engagement. It transforms waiting time at the airport into valuable interactions that support Vancouver International Airport&apos;s key strategic goals.
               </p>
               <p className="font-sans text-lg text-gray-700 leading-relaxed">
                 This initiative directly supports YVR&apos;s 2022-2024 Strategic Plan, with particular emphasis on &quot;Climate: Net Zero by 2030&quot; and &quot;Gateway to the New Economy&quot; priorities.
@@ -113,7 +113,7 @@ const Overview = ({ onNavigateToTab }: OverviewProps) => {
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 h-8 w-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-medium mr-4 mt-0.5">3</div>
-                    <p className="font-sans text-base text-gray-700 pt-1">Earn points and compete on global leaderboards</p>
+                    <p className="font-sans text-base text-gray-700 pt-1">Earn points and compete on global leaderboards for their selected country and themself</p>
                   </li>
                   <li className="flex items-start">
                     <div className="flex-shrink-0 h-8 w-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-medium mr-4 mt-0.5">4</div>
