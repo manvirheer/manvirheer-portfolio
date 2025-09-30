@@ -29,6 +29,10 @@ export default function UnderConstruction() {
             width={64} 
             height={64} 
             className="w-16 h-16"
+            priority
+            sizes="64px"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
         </div>
         
@@ -50,8 +54,8 @@ export default function UnderConstruction() {
         {/* Contact info */}
         <div className="mt-auto">
           <p className="text-sm opacity-60">
-            <a href='#' className="hover:opacity-100 transition-opacity">
-              manvirheer007 [at] gmail.com
+            <a href='mailto:manvirheer007@gmail.com' className="hover:opacity-100 transition-opacity">
+              manvirheer007@gmail.com
             </a>
           </p>
         </div>
