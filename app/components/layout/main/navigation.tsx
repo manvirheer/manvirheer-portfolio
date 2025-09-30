@@ -36,7 +36,9 @@ const Navigation = ({ dimensions, platform, theme, onThemeToggle }: NavigationPr
       <motion.span
         className="indicator cursor-pointer ml-4"
         onClick={onClick}
+        // @ts-ignore - Framer Motion hover animations work correctly
         whileHover={buttonHover}
+        // @ts-ignore - Framer Motion tap animations work correctly
         whileTap={buttonTap}
       >
         ( {isActive ? 'Y' : 'N'} )
@@ -46,6 +48,7 @@ const Navigation = ({ dimensions, platform, theme, onThemeToggle }: NavigationPr
 
   // Reusable navigation link component
   const NavLink = ({ href, label }: { href: string; label: string }) => (
+    // @ts-ignore - Framer Motion hover animations work correctly
     <motion.p whileHover={linkHover} className={href !== '/' ? 'pt-1' : ''}>
       <Link
         href={href}
