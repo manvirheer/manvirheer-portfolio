@@ -88,13 +88,13 @@
   --page-error: #EF4444;
   --page-code: #EC4899;
 
-  /* Bento card tints (moderate pastels) */
-  --bento-blue: #DBEAFE;
-  --bento-purple: #E9D5FF;
-  --bento-green: #D1FAE5;
-  --bento-yellow: #FEF3C7;
-  --bento-orange: #FFEDD5;
-  --bento-pink: #FCE7F3;
+  /* Bento card tints (neutral in light mode) */
+  --bento-blue: var(--page-surface);
+  --bento-purple: var(--page-surface);
+  --bento-green: var(--page-surface);
+  --bento-yellow: var(--page-surface);
+  --bento-orange: var(--page-surface);
+  --bento-pink: var(--page-surface);
 }
 
 /* =============================================================================
