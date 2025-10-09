@@ -34,14 +34,19 @@ export const SystemInfo = () => {
   return (
     <div className="fixed top-20 right-6 font-mono text-xs space-y-1 hidden lg:block" style={{ color: 'var(--page-text-muted)' }}>
       <div className="flex justify-between gap-8">
+        <span style={{ color: 'var(--page-primary)' }}>[</span>
         <span>{themeLabels[theme]}</span>
-        <span>(N)</span>
+        <span style={{ color: 'var(--page-primary)' }}>]</span>
       </div>
       <div className="flex justify-between gap-8">
+        <span style={{ color: 'var(--page-primary)' }}>[</span>
         <span>{resolution}</span>
+        <span style={{ color: 'var(--page-primary)' }}>]</span>
       </div>
       <div className="flex justify-between gap-8">
+        <span style={{ color: 'var(--page-primary)' }}>[</span>
         <span>{platform}</span>
+        <span style={{ color: 'var(--page-primary)' }}>]</span>
       </div>
     </div>
   )

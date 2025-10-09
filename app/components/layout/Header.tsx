@@ -25,25 +25,44 @@ export const Header = () => {
     >
       <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo - Stacked Name */}
-        <Link href="/" className="group">
-          <div className="font-bold font-mono leading-tight tracking-tight">
-            <div className="text-xl">MANVIR</div>
+        <Link href="/" className="group relative">
+          <div className="font-bold font-mono leading-tight tracking-tight transition-colors">
+            <div className="text-xl group-hover:text-[var(--page-primary)] transition-colors duration-200">MANVIR</div>
             <div className="text-xl">HEER</div>
           </div>
+          {/* Blue accent bar */}
+          <motion.div
+            className="absolute -left-2 top-0 w-1 h-0 group-hover:h-full transition-all duration-300"
+            style={{ backgroundColor: 'var(--page-primary)' }}
+          />
         </Link>
 
         {/* Navigation - Bracket Style */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-12">
           {navItems.map((item) => (
-            <Link
+            <motion.div
               key={item.href}
-              href={item.href}
-              className="text-base font-mono tracking-wide hover:opacity-60 transition-opacity"
+              whileHover={{
+                letterSpacing: '0.15em',
+                x: 4,
+              }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
-              <span style={{ color: 'var(--page-text-muted)' }}>[</span>
-              {' '}{item.label}{' '}
-              <span style={{ color: 'var(--page-text-muted)' }}>]</span>
-            </Link>
+              <Link
+                href={item.href}
+                className="text-base font-mono tracking-wide relative inline-block group"
+              >
+                <span style={{ color: 'var(--page-text-muted)' }}>[</span>
+                {' '}{item.label}{' '}
+                <span style={{ color: 'var(--page-text-muted)' }}>]</span>
+
+                {/* Animated underline */}
+                <span
+                  className="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300"
+                  style={{ backgroundColor: 'var(--page-primary)' }}
+                />
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
@@ -52,14 +71,23 @@ export const Header = () => {
           <ThemeSwitcher />
 
           {/* Contact CTA */}
-          <Link
-            href="/contact"
-            className="hidden sm:flex items-center gap-1.5 text-base font-mono tracking-wide hover:opacity-60 transition-opacity border-b pb-0.5"
-            style={{ borderColor: 'var(--page-border)' }}
+          <motion.div
+            whileHover={{
+              letterSpacing: '0.15em',
+              x: 4,
+            }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="hidden sm:block"
           >
-            CONTACT
-            <ArrowUpRightIcon className="w-4 h-4" />
-          </Link>
+            <Link
+              href="/contact"
+              className="flex items-center gap-1.5 text-base font-mono tracking-wide border-b pb-0.5 group"
+              style={{ borderColor: 'var(--page-border)' }}
+            >
+              CONTACT
+              <ArrowUpRightIcon className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </motion.header>
