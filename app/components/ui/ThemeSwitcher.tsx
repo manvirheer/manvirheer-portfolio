@@ -17,16 +17,17 @@ export const ThemeSwitcher = () => {
     <div className="flex gap-1 items-center border p-1" style={{ borderColor: 'var(--page-border)' }}>
       {themes.map((t) => {
         const Icon = t.icon
+        const isActive = theme === t.value
         return (
           <motion.button
             key={t.value}
             onClick={() => setTheme(t.value)}
             className={`p-2 transition-colors ${
-              theme === t.value ? '' : 'opacity-50'
+              !isActive ? 'opacity-50' : ''
             }`}
             style={{
-              backgroundColor: theme === t.value ? 'var(--page-text)' : 'transparent',
-              color: theme === t.value ? 'var(--page-bg)' : 'var(--page-text)',
+              backgroundColor: isActive ? 'var(--page-primary)' : 'transparent',
+              color: isActive ? '#FFFFFF' : 'var(--page-text)',
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

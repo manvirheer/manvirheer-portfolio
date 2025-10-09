@@ -48,20 +48,21 @@ export const WorkInProgress = ({
         </p>
 
         {/* Status */}
-        <div className="inline-block border px-6 py-3 mb-8 font-mono text-sm" style={{ borderColor: 'var(--page-border)' }}>
+        <div className="inline-block border px-6 py-3 mb-8 font-mono text-sm" style={{ borderColor: 'var(--page-primary)' }}>
           <div className="flex items-center gap-2">
             <motion.div
               className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: 'var(--page-warning)' }}
+              style={{ backgroundColor: 'var(--page-primary)' }}
               animate={{
                 opacity: [1, 0.3, 1],
+                scale: [1, 1.2, 1],
               }}
               transition={{
                 duration: 2,
                 repeat: Infinity,
               }}
             />
-            <span>Building v1.0.0</span>
+            <span style={{ color: 'var(--page-primary)' }}>Building v1.0.0</span>
           </div>
         </div>
 
@@ -70,10 +71,17 @@ export const WorkInProgress = ({
           <div>
             <Link
               href="/"
-              className="inline-block px-6 py-3 border font-medium hover:bg-[var(--page-surface-elevated)] transition-colors"
+              className="inline-block px-6 py-3 border font-medium group relative overflow-hidden transition-all hover:border-[var(--page-primary)]"
               style={{ borderColor: 'var(--page-border)' }}
             >
-              ← Back to Home
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                ← Back to Home
+              </span>
+              {/* Blue fill on hover */}
+              <motion.div
+                className="absolute inset-0 w-0 group-hover:w-full transition-all duration-300"
+                style={{ backgroundColor: 'var(--page-primary)' }}
+              />
             </Link>
           </div>
         )}

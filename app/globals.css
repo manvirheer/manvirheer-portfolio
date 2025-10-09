@@ -283,15 +283,15 @@ html {
   background-image:
     repeating-linear-gradient(
       0deg,
-      rgba(255, 0, 0, 0.1) 0px,
-      rgba(255, 0, 0, 0.1) 1px,
+      rgba(0, 102, 255, 0.15) 0px,
+      rgba(0, 102, 255, 0.15) 1px,
       transparent 1px,
       transparent 4px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(255, 0, 0, 0.1) 0px,
-      rgba(255, 0, 0, 0.1) 1px,
+      rgba(0, 102, 255, 0.15) 0px,
+      rgba(0, 102, 255, 0.15) 1px,
       transparent 1px,
       transparent 4px
     );
