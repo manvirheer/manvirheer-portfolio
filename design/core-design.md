@@ -102,46 +102,108 @@ xl:   25px  (1.563rem)  - h3
 
 ## Color System
 
-### Approach
-Move away from grayscale minimalism. Embrace functional color with purpose.
+### Strategy
+Bold, confident, professional. Embrace functional color with purpose.
 
-**Base Palette (brutalist):**
+**3 Themes:**
+1. **Light** - Professional, first impressions (default)
+2. **Dark** - Focus, development, late-night browsing
+3. **Reading** - Warm, content consumption, reduced blue light
+
+### Light Mode (Default)
+Bold and confident, trustworthy professional.
+
+**Base:**
 ```
-Background:  #FAFAFA (off-white, not pure white)
-Surface:     #FFFFFF (cards, elevated)
-Border:      #000000 (strong borders)
-Text:        #0A0A0A (near-black)
-Text-muted:  #666666 (secondary text)
+Background:  #FFFFFF (pure white)
+Surface:     #FFFFFF (cards)
+Elevated:    #F9FAFB (slight lift)
+Border:      #000000 (brutalist strong)
+Text:        #111827 (near-black)
+Text-muted:  #374151 (gray-700)
 ```
 
-**Accent System (functional):**
+**Accents:**
 ```
-Primary:     #0066FF (action, links)
-Success:     #00CC66 (positive states)
-Warning:     #FF9500 (alerts)
-Error:       #FF3B30 (errors)
-Code:        #FF006E (code highlights)
+Primary:     #0066FF (bold blue - trustworthy, professional)
+Success:     #10B981 (green)
+Warning:     #F59E0B (amber)
+Error:       #EF4444 (red)
+Code:        #EC4899 (pink)
 ```
 
-**Bento Colors (variety for cards):**
+**Bento Tints (moderate pastels):**
 ```
-Blue:    #E5F0FF
-Green:   #E5F9F0
-Yellow:  #FFF8E5
-Purple:  #F3E5FF
-Red:     #FFE5E5
-Orange:  #FFE5D9
+Blue:    #DBEAFE (light blue)
+Purple:  #E9D5FF (light purple)
+Green:   #D1FAE5 (light green)
+Yellow:  #FEF3C7 (light yellow)
+Orange:  #FFEDD5 (light orange)
+Pink:    #FCE7F3 (light pink)
 ```
 
 ### Dark Mode
-Maintain brutalist contrast, not subtle dark grays.
+Foundation: #32374A (navy blue-gray)
 
+**Base:**
 ```
-Background:  #0A0A0A
-Surface:     #1A1A1A
-Border:      #FFFFFF (inverted, still strong)
-Text:        #FAFAFA
-Text-muted:  #999999
+Background:  #1A1D28 (darkest navy)
+Surface:     #232732 (dark navy)
+Elevated:    #2A2F3C (medium dark navy)
+Border:      #3F4558 (softer than pure white)
+Text:        #E5E7EB (off-white, not harsh)
+Text-muted:  #9CA3AF (gray)
+```
+
+**Accents:**
+```
+Primary:     #3B82F6 (brighter blue for dark bg)
+Success:     #34D399 (bright green)
+Warning:     #FBBF24 (bright amber)
+Error:       #F87171 (bright red)
+Code:        #F472B6 (bright pink)
+```
+
+**Bento Tints (muted dark):**
+```
+Blue:    #1E3A5F (dark blue)
+Purple:  #3B2F4A (dark purple)
+Green:   #1F3D2F (dark green)
+Yellow:  #3D3420 (dark yellow)
+Orange:  #3D2A1F (dark orange)
+Pink:    #3D2432 (dark pink)
+```
+
+### Reading Mode
+Warm, sepia-inspired for long-form content.
+
+**Base:**
+```
+Background:  #FAF8F3 (lightest cream)
+Surface:     #F5F1E8 (light cream)
+Elevated:    #FFFFFF (pure white for cards)
+Border:      #5C4A3A (warm dark)
+Text:        #3D2F23 (darkest warm)
+Text-muted:  #5C4A3A (warm brown)
+```
+
+**Accents:**
+```
+Primary:     #2563EB (warmer blue)
+Success:     #059669 (warm green)
+Warning:     #D97706 (warm amber)
+Error:       #DC2626 (warm red)
+Code:        #BE185D (warm pink)
+```
+
+**Bento Tints (warm pastels):**
+```
+Blue:    #DBEAFE (soft blue)
+Purple:  #F3E8FF (warm purple)
+Green:   #D1FAE5 (soft green)
+Yellow:  #FEF3C7 (warm yellow)
+Orange:  #FFEDD5 (peach)
+Pink:    #FCE7F3 (soft pink)
 ```
 
 ## Animation Philosophy

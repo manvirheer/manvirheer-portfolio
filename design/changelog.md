@@ -37,6 +37,30 @@ All notable design decisions and iterations are documented here.
 
 **About/Bio:** LinkedIn profile (Manvir Heer)
 
+### Tech Stack & Color System Defined
+**Added:** Complete tech stack documentation (`tech-stack.md`)
+- Locked dependencies: Framer Motion, Tailwind v4, Heroicons
+- Animation standards: All variants in motion.ts, 100-400ms timing
+- Component patterns: Build custom, no UI libraries
+
+**Color System:**
+- **Strategy:** Bold/confident professional (saturated blue primary)
+- **Primary color:** #0066FF (trustworthy blue) for light mode
+- **Dark foundation:** #32374A (navy blue-gray) as base
+- **Bento variety:** Moderate pastels (clear but soft)
+
+**Theme Structure:** 3 themes total
+1. **Light** - Default, professional, first impressions
+2. **Dark** - Focus mode, development, using #32374A foundation
+3. **Reading** - Warm sepia tones, long-form content
+
+**Rationale:**
+- Blue = tech standard, trustworthy for job hunting
+- Bold saturated tones = confident, not timid
+- Moderate pastels = visual variety without overwhelming
+- 3 themes = covers all use cases without complexity
+- Navy dark mode = sophisticated, not pure black
+
 ## [Unreleased] - 2025-10-08
 
 ### Philosophy Shift
