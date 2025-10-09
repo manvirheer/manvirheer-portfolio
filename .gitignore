@@ -23,7 +23,7 @@
 # misc
 .DS_Store
 *.pem
-*.Identifier
+CLAUDE.md
 
 # debug
 npm-debug.log*

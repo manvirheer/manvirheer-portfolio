@@ -5,10 +5,10 @@ import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher'
 import { motion } from 'framer-motion'
 
 const navItems = [
-  { label: 'Work', href: '/#work' },
-  { label: 'About', href: '/#about' },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
   { label: 'Writing', href: '/writing' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export const Header = () => {
