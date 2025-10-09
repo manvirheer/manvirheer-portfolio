@@ -4,12 +4,14 @@ import { BentoGrid } from '@/app/components/ui/BentoGrid'
 import { BentoCard } from '@/app/components/ui/BentoCard'
 import { GridOverlay } from '@/app/components/ui/GridOverlay'
 import { Header } from '@/app/components/layout/Header'
+import { SystemInfo } from '@/app/components/ui/SystemInfo'
 
 export default function Home() {
   return (
     <>
       <GridOverlay />
       <Header />
+      <SystemInfo />
 
       <div className="min-h-screen pt-20">
         {/* Main Content */}
