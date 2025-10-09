@@ -6,7 +6,8 @@ import { motion } from 'framer-motion'
 import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
 
 const navItems = [
-  { label: 'WORK', href: '/work' },
+  { label: 'PROJECTS', href: '/projects' },
+  { label: 'EXPERIENCE', href: '/experience' },
   { label: 'ABOUT', href: '/about' },
   { label: 'WRITING', href: '/writing' },
 ]
@@ -23,7 +24,7 @@ export const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
         {/* Logo - Stacked Name */}
         <Link href="/" className="group relative">
           <div className="font-bold font-mono leading-tight tracking-tight transition-colors">
@@ -38,7 +39,7 @@ export const Header = () => {
         </Link>
 
         {/* Navigation - Bracket Style */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-12">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navItems.map((item) => (
             <motion.div
               key={item.href}
@@ -50,7 +51,7 @@ export const Header = () => {
             >
               <Link
                 href={item.href}
-                className="text-base font-mono tracking-wide relative inline-block group"
+                className="text-base font-mono tracking-wide relative inline-block group whitespace-nowrap"
               >
                 <span style={{ color: 'var(--page-text-muted)' }}>[</span>
                 {' '}{item.label}{' '}
@@ -67,7 +68,7 @@ export const Header = () => {
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <ThemeSwitcher />
 
           {/* Contact CTA */}
@@ -77,11 +78,11 @@ export const Header = () => {
               x: 4,
             }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="hidden sm:block"
+            className="hidden xl:block"
           >
             <Link
               href="/contact"
-              className="flex items-center gap-1.5 text-base font-mono tracking-wide border-b pb-0.5 group"
+              className="flex items-center gap-1.5 text-base font-mono tracking-wide border-b pb-0.5 group whitespace-nowrap"
               style={{ borderColor: 'var(--page-border)' }}
             >
               CONTACT
