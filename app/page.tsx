@@ -7,8 +7,34 @@ import { Header } from '@/app/components/layout/Header'
 import { SystemInfo } from '@/app/components/ui/SystemInfo'
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Manvir Heer',
+    url: 'https://manvirheer.com',
+    jobTitle: 'Software Engineer',
+    description: 'Full-stack software engineer specializing in Python, TypeScript, and modern web technologies',
+    sameAs: [
+      'https://github.com/manvirheer',
+      'https://linkedin.com/in/manvirheer',
+    ],
+    knowsAbout: [
+      'Software Engineering',
+      'Python',
+      'TypeScript',
+      'Next.js',
+      'React',
+      'Data Analysis',
+      'DevOps',
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <GridOverlay />
       <Header />
       <SystemInfo />
