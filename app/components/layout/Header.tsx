@@ -3,12 +3,12 @@
 import Link from 'next/link'
 import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher'
 import { motion } from 'framer-motion'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
 
 const navItems = [
-  { label: 'Work', href: '/work' },
-  { label: 'About', href: '/about' },
-  { label: 'Writing', href: '/writing' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'WORK', href: '/work' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'WRITING', href: '/writing' },
 ]
 
 export const Header = () => {
@@ -24,30 +24,25 @@ export const Header = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <motion.div
-            className="w-8 h-8 border-2 flex items-center justify-center font-bold font-mono"
-            style={{ borderColor: 'var(--page-border)' }}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            M
-          </motion.div>
-          <span className="font-bold text-lg font-[family-name:var(--font-serif)] hidden sm:inline">
-            Manvir Heer
-          </span>
+        {/* Logo - Stacked Name */}
+        <Link href="/" className="group">
+          <div className="font-bold font-mono leading-tight tracking-tight">
+            <div className="text-xl">MANVIR</div>
+            <div className="text-xl">HEER</div>
+          </div>
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Navigation - Bracket Style */}
+        <nav className="hidden md:flex items-center gap-8 lg:gap-12">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium hover:opacity-70 transition-opacity"
+              className="text-base font-mono tracking-wide hover:opacity-60 transition-opacity"
             >
-              {item.label}
+              <span style={{ color: 'var(--page-text-muted)' }}>[</span>
+              {' '}{item.label}{' '}
+              <span style={{ color: 'var(--page-text-muted)' }}>]</span>
             </Link>
           ))}
         </nav>
@@ -56,28 +51,15 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
 
-          {/* CTA Buttons */}
-          <div className="hidden sm:flex items-center gap-2">
-            <Link
-              href="https://github.com/manvirheer"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-sm border hover:bg-[var(--page-surface-elevated)] transition-colors"
-              style={{ borderColor: 'var(--page-border)' }}
-            >
-              GitHub
-            </Link>
-            <Link
-              href="/#contact"
-              className="px-4 py-2 text-sm font-medium transition-colors"
-              style={{
-                backgroundColor: 'var(--page-primary)',
-                color: 'var(--page-bg)',
-              }}
-            >
-              Get in Touch
-            </Link>
-          </div>
+          {/* Contact CTA */}
+          <Link
+            href="/contact"
+            className="hidden sm:flex items-center gap-1.5 text-base font-mono tracking-wide hover:opacity-60 transition-opacity border-b pb-0.5"
+            style={{ borderColor: 'var(--page-border)' }}
+          >
+            CONTACT
+            <ArrowUpRightIcon className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </motion.header>
