@@ -1,7 +1,9 @@
+import type { Easing } from 'framer-motion';
+
 // Easing curves
-export const ease = [0.34, 1.56, 0.64, 1];
-export const standardEase = [0.33, 1, 0.68, 1];
-export const smoothEase = [0.25, 1, 0.5, 1];
+export const ease: Easing = [0.34, 1.56, 0.64, 1];
+export const standardEase: Easing = [0.33, 1, 0.68, 1];
+export const smoothEase: Easing = [0.25, 1, 0.5, 1];
 
 // Timing constants
 export const TIMING = {
