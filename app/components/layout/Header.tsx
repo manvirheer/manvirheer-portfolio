@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { ThemeSwitcher } from '@/app/components/ui/ThemeSwitcher'
-import { motion } from 'framer-motion'
-import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRightIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
 
 const navItems = [
   { label: 'PROJECTS', href: '/projects' },
@@ -13,6 +14,26 @@ const navItems = [
 ]
 
 export const Header = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
+
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
+
   return (
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 border-b"
@@ -89,8 +110,61 @@ export const Header = () => {
               <ArrowUpRightIcon className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </Link>
           </motion.div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6" />
+            ) : (
+              <Bars3Icon className="w-6 h-6" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 top-[73px] z-40 lg:hidden"
+            style={{ backgroundColor: 'var(--page-bg)' }}
+          >
+            <nav className="flex flex-col items-center justify-center h-full gap-8 px-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-mono tracking-wide group"
+                >
+                  <span style={{ color: 'var(--page-text-muted)' }}>[</span>
+                  {' '}{item.label}{' '}
+                  <span style={{ color: 'var(--page-text-muted)' }}>]</span>
+                </Link>
+              ))}
+
+              {/* Contact in Mobile Menu */}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 text-2xl font-mono tracking-wide border-b-2 pb-1"
+                style={{ borderColor: 'var(--page-border)' }}
+              >
+                CONTACT
+                <ArrowUpRightIcon className="w-5 h-5" />
+              </Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }
