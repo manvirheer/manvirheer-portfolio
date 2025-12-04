@@ -16,6 +16,7 @@ export const TIMING = {
 // Card animations
 export const cardHover = {
   scale: 1,
+  y: -2,
   borderWidth: '2px',
   transition: {
     duration: TIMING.NORMAL / 1000,
@@ -28,6 +29,26 @@ export const cardTap = {
   transition: {
     duration: TIMING.FAST / 1000,
     ease: standardEase,
+  },
+};
+
+// Enhanced card animations with glow
+export const cardHoverEnhanced = {
+  scale: 1.01,
+  y: -4,
+  transition: {
+    duration: 0.3,
+    ease: smoothEase,
+  },
+};
+
+export const cardHoverGlow = {
+  boxShadow: '0 0 30px rgba(0, 102, 255, 0.5)',
+  scale: 1.01,
+  y: -4,
+  transition: {
+    duration: 0.3,
+    ease: smoothEase,
   },
 };
 
@@ -79,5 +100,42 @@ export const buttonTap = {
   transition: {
     duration: 0.15,
     ease: standardEase,
+  },
+};
+
+// Scroll-triggered fade in animations
+export const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: smoothEase,
+    },
+  },
+};
+
+export const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: smoothEase,
+    },
+  },
+};
+
+// Scale in animation
+export const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: smoothEase,
+    },
   },
 };

@@ -35,7 +35,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       transitionTimer.current = window.setTimeout(() => {
         setIsTransitioning(false)
         transitionTimer.current = null
-      }, 400)
+      }, 600)
     },
     [theme]
   )
