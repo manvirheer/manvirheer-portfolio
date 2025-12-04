@@ -29,24 +29,60 @@ export default function Home() {
     ],
   }
 
-  const projects = [
+  const careerWins = [
+    {
+      title: 'PgBouncer Database Optimization',
+      company: 'Tenzr Health • 2025',
+      metrics: '329ms → 2ms connection time • +458% concurrent handling',
+      description: 'Implemented connection pooling with PgBouncer for HIPAA-compliant healthcare platform. Built benchmarking tool and documentation for reproducibility.',
+      tech: 'PostgreSQL • PgBouncer • Docker',
+      link: null,
+      badge: '🏢 Professional',
+    },
+    {
+      title: 'AI Exercise Plan Generator (RAG)',
+      company: 'Tenzr Health • 2025',
+      metrics: 'First production RAG system • 1,578 exercises → intelligent plans',
+      description: 'Built full-stack AI application with hybrid search (70% semantic + 30% keyword) for HIPAA-compliant healthcare platform. Python/FastAPI backend, Next.js frontend, Qdrant vector database.',
+      tech: 'Python • RAG • LlamaIndex • Qdrant',
+      link: null,
+      badge: '🏢 Professional',
+    },
+    {
+      title: 'Marketplace Performance Optimization',
+      company: 'A2P Energy • 2024',
+      metrics: '20s → 2s page load time (90% faster)',
+      description: 'Database query optimization and eager loading for energy marketplace platform serving industrial facilities.',
+      tech: 'NestJS • PostgreSQL • Query Optimization',
+      link: null,
+      badge: '🏢 Professional',
+    },
+  ]
+
+  const personalProjects = [
+    {
+      title: 'Whisper Typer',
+      tagline: 'Voice-to-text with AMD GPU acceleration',
+      description: 'Real-time voice transcription system using whisper.cpp with Vulkan backend. Solves AMD GPU compatibility for seamless voice typing on Linux.',
+      tech: 'Python • Whisper.cpp • Vulkan',
+      link: 'https://github.com/manvirheer/whisper-typer',
+      badge: '🔧 Personal',
+    },
     {
       title: 'nx-logstats',
-      description: 'CLI tool for analyzing metrics from NGINX access logs',
-      tech: 'Python',
+      tagline: 'NGINX log analysis CLI',
+      description: 'Command-line tool for analyzing metrics from NGINX access logs. Performance insights and traffic patterns.',
+      tech: 'Python • CLI • Data Analysis',
       link: 'https://github.com/manvirheer/nx-logstats',
+      badge: '🔧 Personal',
     },
     {
-      title: 'Parking Ticket Analysis',
-      description: 'Geospatial analysis of Vancouver parking data',
-      tech: 'Data Analysis',
-      link: 'https://github.com/manvirheer/vancouver-parking-analysis',
-    },
-    {
-      title: 'Flow Metrics',
-      description: 'Next.js frontend for industrial client',
-      tech: 'TypeScript',
-      link: null,
+      title: 'Vancouver Parking Analysis',
+      tagline: 'Geospatial data analysis',
+      description: 'In-depth analysis of Vancouver parking ticket data using Python and geospatial techniques. Data visualization and pattern discovery.',
+      tech: 'Python • Geospatial • Data Viz',
+      link: 'https://github.com/manvirheer/parkingticketanalysis',
+      badge: '🔧 Personal',
     },
   ]
 
@@ -64,14 +100,14 @@ export default function Home() {
         <main className="max-w-6xl mx-auto px-6 md:px-10 py-16 space-y-32">
           {/* Hero Section */}
           <section className="py-20 text-center">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 font-[family-name:var(--font-serif)]">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-serif)]">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-gradient-animated"
               >
-                Software
+                DevOps / Infrastructure
               </motion.span>
               {' '}
               <motion.span
@@ -86,10 +122,19 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-2xl md:text-3xl"
+              className="text-xl md:text-2xl mb-4"
               style={{ color: 'var(--page-text-muted)' }}
             >
-              Building precision-engineered digital experiences
+              Shipping measurable performance wins
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="text-base md:text-lg font-mono"
+              style={{ color: 'var(--page-text-muted)' }}
+            >
+              Healthcare tech (HIPAA) • AI/RAG systems • Performance engineering • Multi-cloud (AWS + Azure)
             </motion.p>
           </section>
 
@@ -104,14 +149,16 @@ export default function Home() {
             <div>
               <h2 className="text-4xl font-bold mb-6">About</h2>
               <p className="text-lg leading-relaxed" style={{ color: 'var(--page-text-muted)' }}>
-                Full-stack developer with expertise in Python, TypeScript, and modern web technologies.
-                Passionate about data analysis, DevOps, and building scalable applications.
+                Infrastructure engineer shipping production systems at Tenzr Health. Recent work: RAG-powered
+                exercise generator, database connection pooling, Docker containerization, DNS management, and
+                HIPAA-compliant healthcare infrastructure on AWS. I handle deployment pipelines, observability,
+                and infrastructure automation.
               </p>
             </div>
             <div>
               <h2 className="text-4xl font-bold mb-6">Tech Stack</h2>
               <div className="flex flex-wrap gap-3">
-                {['Python', 'TypeScript', 'Next.js', 'React', 'Node.js'].map((tech) => (
+                {['Python', 'TypeScript', 'AWS', 'Azure', 'PostgreSQL', 'Docker', 'Next.js', 'React', 'Node.js', 'RAG/LLMs', 'Qdrant'].map((tech) => (
                   <span
                     key={tech}
                     className="px-4 py-2 text-sm font-medium border border-current"
@@ -124,16 +171,19 @@ export default function Home() {
             </div>
           </motion.section>
 
-          {/* Projects Section */}
+          {/* Career Impact Section */}
           <motion.section
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-4xl font-bold mb-12">Featured Projects</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {projects.map((project, index) => {
+            <h2 className="text-4xl font-bold mb-4">Career Impact</h2>
+            <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
+              Quantified wins from production systems at Tenzr Health, A2P Energy, and SaaSberry
+            </p>
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {careerWins.map((project, index) => {
                 const shadowClass =
                   index === 0 ? 'shadow-gradient-blue-purple' :
                   index === 1 ? 'shadow-gradient-blue-cyan' :
@@ -153,7 +203,80 @@ export default function Home() {
                       whileHover={{ y: -4, scale: 1.02 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                      <div className="text-xs font-mono mb-2" style={{ color: 'var(--page-text-muted)' }}>
+                        {project.badge}
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                      <p className="text-sm font-medium mb-3" style={{ color: 'var(--page-primary)' }}>
+                        {project.company}
+                      </p>
+                      <p className="text-sm font-bold mb-4" style={{ color: 'var(--page-text)' }}>
+                        {project.metrics}
+                      </p>
+                      <p className="text-sm mb-6 flex-1" style={{ color: 'var(--page-text-muted)' }}>
+                        {project.description}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span
+                          className="text-xs px-3 py-1"
+                          style={{
+                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                            color: 'var(--page-primary)',
+                            borderRadius: '2px',
+                          }}
+                        >
+                          {project.tech}
+                        </span>
+                        <span className="text-xs font-mono" style={{ color: 'var(--page-text-muted)' }}>
+                          [ Private ]
+                        </span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.section>
+
+          {/* Personal Projects Section */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl font-bold mb-4">Personal Projects</h2>
+            <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
+              Side projects exploring AI, systems programming, and data analysis
+            </p>
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {personalProjects.map((project, index) => {
+                const shadowClass =
+                  index === 0 ? 'shadow-gradient-blue-purple' :
+                  index === 1 ? 'shadow-gradient-blue-cyan' :
+                  'shadow-gradient-purple-pink';
+
+                return (
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="group"
+                  >
+                    <motion.div
+                      className={`p-6 h-full flex flex-col bg-[var(--page-surface)] ${shadowClass} transition-all duration-300 rounded`}
+                      whileHover={{ y: -4, scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="text-xs font-mono mb-2" style={{ color: 'var(--page-text-muted)' }}>
+                        {project.badge}
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                      <p className="text-sm font-medium mb-4 italic" style={{ color: 'var(--page-primary)' }}>
+                        {project.tagline}
+                      </p>
                       <p className="text-sm mb-6 flex-1" style={{ color: 'var(--page-text-muted)' }}>
                         {project.description}
                       </p>
