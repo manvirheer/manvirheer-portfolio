@@ -139,3 +139,59 @@ export const scaleIn = {
     },
   },
 };
+
+// Custom bracket cursor animations
+export const cursorBracketLeft = {
+  default: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+  hover: {
+    x: -4,
+    opacity: 1,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+};
+
+export const cursorBracketRight = {
+  default: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+  hover: {
+    x: 4,
+    opacity: 1,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+};
+
+export const cursorDot = {
+  default: {
+    scale: 1,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+  hover: {
+    scale: 1.2,
+    transition: {
+      duration: TIMING.NORMAL / 1000,
+      ease: smoothEase,
+    },
+  },
+};
