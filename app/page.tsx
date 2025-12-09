@@ -2,18 +2,34 @@
 
 import { GridOverlay } from '@/app/components/ui/GridOverlay'
 import { Header } from '@/app/components/layout/Header'
-import { SystemInfo } from '@/app/components/ui/SystemInfo'
+import { StickyTabs, useScrollTabs } from '@/app/components/ui/SectionTabs'
+import { TerminalWindow } from '@/app/components/ui/TerminalWindow'
+import { SectionDivider } from '@/app/components/ui/SectionDivider'
+import { AnimatedComparison } from '@/app/components/ui/AnimatedMetric'
+import { PackageManifest, defaultSkills } from '@/app/components/ui/PackageManifest'
+import { TerminalStatus } from '@/app/components/ui/TerminalStatus'
+import { FloatingParallaxImages } from '@/app/components/ui/FloatingParallaxImages'
 import { motion } from 'framer-motion'
 import { fadeInUp } from '@/app/config/motion'
 
+const tabs = [
+  { id: 'impact', label: 'IMPACT' },
+  { id: 'projects', label: 'PROJECTS' },
+  { id: 'stack', label: 'STACK' },
+  { id: 'connect', label: 'CONNECT' },
+]
+
 export default function Home() {
+  const { activeTab, scrollToSection } = useScrollTabs(tabs.map((t) => t.id))
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Manvir Heer',
     url: 'https://manvirheer.com',
     jobTitle: 'DevOps / Infrastructure Engineer',
-    description: 'Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker containerization, DNS management, and HIPAA-compliant healthcare infrastructure.',
+    description:
+      'Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker containerization, DNS management, and HIPAA-compliant healthcare infrastructure.',
     sameAs: [
       'https://github.com/manvirheer',
       'https://linkedin.com/in/manvirheer',
@@ -37,30 +53,33 @@ export default function Home() {
   const careerWins = [
     {
       title: 'PgBouncer Database Optimization',
-      company: 'Tenzr Health • 2025',
-      metrics: '329ms → 2ms connection time • +458% concurrent handling',
-      description: 'Implemented connection pooling with PgBouncer for HIPAA-compliant healthcare platform. Built benchmarking tool and documentation for reproducibility.',
-      tech: 'PostgreSQL • PgBouncer • Docker',
-      link: null,
-      badge: '🏢 Professional',
+      company: 'Tenzr Health',
+      year: '2025',
+      metric: { before: 329, after: 2, unit: 'ms', label: 'Connection Time' },
+      secondaryMetric: '+458% concurrent handling',
+      description:
+        'Implemented connection pooling with PgBouncer for HIPAA-compliant healthcare platform. Built benchmarking tool and documentation for reproducibility.',
+      tech: ['PostgreSQL', 'PgBouncer', 'Docker'],
     },
     {
       title: 'AI Exercise Plan Generator (RAG)',
-      company: 'Tenzr Health • 2025',
-      metrics: 'First production RAG system • 1,578 exercises → intelligent plans',
-      description: 'Built full-stack AI application with hybrid search (70% semantic + 30% keyword) for HIPAA-compliant healthcare platform. Python/FastAPI backend, Next.js frontend, Qdrant vector database.',
-      tech: 'Python • RAG • LlamaIndex • Qdrant',
-      link: null,
-      badge: '🏢 Professional',
+      company: 'Tenzr Health',
+      year: '2025',
+      metric: { before: 1578, after: 1, unit: '', label: 'Exercises → Intelligent Plans' },
+      secondaryMetric: 'First production RAG system',
+      description:
+        'Built full-stack AI application with hybrid search (70% semantic + 30% keyword) for HIPAA-compliant healthcare platform.',
+      tech: ['Python', 'RAG', 'LlamaIndex', 'Qdrant'],
     },
     {
       title: 'Marketplace Performance Optimization',
-      company: 'A2P Energy • 2024',
-      metrics: '20s → 2s page load time (90% faster)',
-      description: 'Database query optimization and eager loading for energy marketplace platform serving industrial facilities.',
-      tech: 'NestJS • PostgreSQL • Query Optimization',
-      link: null,
-      badge: '🏢 Professional',
+      company: 'A2P Energy',
+      year: '2024',
+      metric: { before: 20, after: 2, unit: 's', label: 'Page Load Time' },
+      secondaryMetric: '90% faster',
+      description:
+        'Database query optimization and eager loading for energy marketplace platform serving industrial facilities.',
+      tech: ['NestJS', 'PostgreSQL', 'Query Optimization'],
     },
   ]
 
@@ -68,26 +87,26 @@ export default function Home() {
     {
       title: 'Whisper Typer',
       tagline: 'Voice-to-text with AMD GPU acceleration',
-      description: 'Real-time voice transcription system using whisper.cpp with Vulkan backend. Solves AMD GPU compatibility for seamless voice typing on Linux.',
-      tech: 'Python • Whisper.cpp • Vulkan',
+      description:
+        'Real-time voice transcription system using whisper.cpp with Vulkan backend. Solves AMD GPU compatibility for seamless voice typing on Linux.',
+      tech: ['Python', 'Whisper.cpp', 'Vulkan'],
       link: 'https://github.com/manvirheer/whisper-typer',
-      badge: '🔧 Personal',
     },
     {
       title: 'nx-logstats',
       tagline: 'NGINX log analysis CLI',
-      description: 'Command-line tool for analyzing metrics from NGINX access logs. Performance insights and traffic patterns.',
-      tech: 'Python • CLI • Data Analysis',
+      description:
+        'Command-line tool for analyzing metrics from NGINX access logs. Performance insights and traffic patterns.',
+      tech: ['Python', 'CLI', 'Data Analysis'],
       link: 'https://github.com/manvirheer/nx-logstats',
-      badge: '🔧 Personal',
     },
     {
       title: 'Vancouver Parking Analysis',
       tagline: 'Geospatial data analysis',
-      description: 'In-depth analysis of Vancouver parking ticket data using Python and geospatial techniques. Data visualization and pattern discovery.',
-      tech: 'Python • Geospatial • Data Viz',
+      description:
+        'In-depth analysis of Vancouver parking ticket data using Python and geospatial techniques. Data visualization and pattern discovery.',
+      tech: ['Python', 'Geospatial', 'Data Viz'],
       link: 'https://github.com/manvirheer/parkingticketanalysis',
-      badge: '🔧 Personal',
     },
   ]
 
@@ -99,240 +118,117 @@ export default function Home() {
       />
       <GridOverlay />
       <Header />
-      <SystemInfo />
+
+      {/* Sticky Navigation Tabs */}
+      <StickyTabs
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={scrollToSection}
+        showAfterScroll={400}
+      />
 
       <div className="min-h-screen pt-20">
-        <main className="max-w-6xl mx-auto px-6 md:px-10 py-16 space-y-32">
-          {/* Hero Section */}
-          <section className="py-20 text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-serif)]">
+        <main>
+          {/* ============================================
+              HERO SECTION
+              ============================================ */}
+          <section className="relative py-24 md:py-32 text-center overflow-hidden">
+            {/* Corner gradient glow - animated soft pastel colors */}
+            <motion.div
+              className="absolute -top-40 -right-40 w-[1000px] h-[1000px] pointer-events-none"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              style={{
+                background: `
+                  radial-gradient(circle at 70% 30%, rgba(167, 139, 250, 0.2) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 20%, rgba(251, 182, 206, 0.22) 0%, transparent 40%),
+                  radial-gradient(circle at 55% 10%, rgba(165, 243, 252, 0.15) 0%, transparent 50%)
+                `,
+              }}
+            />
+            <motion.div
+              className="absolute -top-20 -right-20 w-[600px] h-[600px] pointer-events-none"
+              animate={{
+                scale: [1, 1.15, 1],
+                rotate: [0, 5, 0],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 1,
+              }}
+              style={{
+                background: `
+                  radial-gradient(circle at 60% 40%, rgba(251, 207, 232, 0.25) 0%, transparent 50%)
+                `,
+              }}
+            />
+
+            {/* Floating parallax images - Anytype.io style */}
+            <FloatingParallaxImages />
+
+            <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 headline-mixed relative z-10">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-gradient-animated"
               >
                 DevOps / Infrastructure
               </motion.span>
-              {' '}
+              <br />
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
+                className="accent text-gradient-animated"
               >
                 Engineer
               </motion.span>
             </h1>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-xl md:text-2xl mb-4"
+              className="text-xl md:text-2xl mb-6 relative z-10"
               style={{ color: 'var(--page-text-muted)' }}
             >
-              Shipping measurable performance wins
+              Shipping <span className="prose-accent">measurable</span> performance wins
             </motion.p>
-            <motion.p
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-base md:text-lg font-mono"
+              className="terminal-text text-sm md:text-base relative z-10"
               style={{ color: 'var(--page-text-muted)' }}
             >
-              Healthcare tech (HIPAA) • AI/RAG systems • Performance engineering • Multi-cloud (AWS + Azure)
-            </motion.p>
-          </section>
+              Healthcare tech (HIPAA) • AI/RAG systems • Performance engineering • Multi-cloud
+            </motion.div>
 
-          {/* About Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="grid md:grid-cols-2 gap-16"
-          >
-            <div>
-              <h2 className="text-4xl font-bold mb-6">About</h2>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--page-text-muted)' }}>
-                Infrastructure engineer shipping production systems at Tenzr Health. Recent work: RAG-powered
-                exercise generator, database connection pooling, Docker containerization, DNS management, and
-                HIPAA-compliant healthcare infrastructure on AWS. I handle deployment pipelines, observability,
-                and infrastructure automation.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-4xl font-bold mb-6">Tech Stack</h2>
-              <div className="flex flex-wrap gap-3">
-                {['Python', 'TypeScript', 'AWS', 'Azure', 'PostgreSQL', 'Docker', 'Next.js', 'React', 'Node.js', 'RAG/LLMs', 'Qdrant'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-4 py-2 text-sm font-medium border border-current"
-                    style={{ borderRadius: '2px' }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-
-          {/* Career Impact Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-4xl font-bold mb-4">Career Impact</h2>
-            <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
-              Quantified wins from production systems at Tenzr Health, A2P Energy, and SaaSberry
-            </p>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {careerWins.map((project, index) => {
-                const shadowClass =
-                  index === 0 ? 'shadow-gradient-blue-purple' :
-                  index === 1 ? 'shadow-gradient-blue-cyan' :
-                  'shadow-gradient-purple-pink';
-
-                return (
-                  <motion.div
-                    key={project.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="group"
-                  >
-                    <motion.div
-                      className={`p-6 h-full flex flex-col bg-[var(--page-surface)] ${shadowClass} transition-all duration-300 rounded`}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="text-xs font-mono mb-2" style={{ color: 'var(--page-text-muted)' }}>
-                        {project.badge}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-sm font-medium mb-3" style={{ color: 'var(--page-primary)' }}>
-                        {project.company}
-                      </p>
-                      <p className="text-sm font-bold mb-4" style={{ color: 'var(--page-text)' }}>
-                        {project.metrics}
-                      </p>
-                      <p className="text-sm mb-6 flex-1" style={{ color: 'var(--page-text-muted)' }}>
-                        {project.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span
-                          className="text-xs px-3 py-1"
-                          style={{
-                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
-                            color: 'var(--page-primary)',
-                            borderRadius: '2px',
-                          }}
-                        >
-                          {project.tech}
-                        </span>
-                        <span className="text-xs font-mono" style={{ color: 'var(--page-text-muted)' }}>
-                          [ Private ]
-                        </span>
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          {/* Personal Projects Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-4xl font-bold mb-4">Personal Projects</h2>
-            <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
-              Side projects exploring AI, systems programming, and data analysis
-            </p>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {personalProjects.map((project, index) => {
-                const shadowClass =
-                  index === 0 ? 'shadow-gradient-blue-purple' :
-                  index === 1 ? 'shadow-gradient-blue-cyan' :
-                  'shadow-gradient-purple-pink';
-
-                return (
-                  <motion.div
-                    key={project.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="group"
-                  >
-                    <motion.div
-                      className={`p-6 h-full flex flex-col bg-[var(--page-surface)] ${shadowClass} transition-all duration-300 rounded`}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="text-xs font-mono mb-2" style={{ color: 'var(--page-text-muted)' }}>
-                        {project.badge}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-sm font-medium mb-4 italic" style={{ color: 'var(--page-primary)' }}>
-                        {project.tagline}
-                      </p>
-                      <p className="text-sm mb-6 flex-1" style={{ color: 'var(--page-text-muted)' }}>
-                        {project.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span
-                          className="text-xs px-3 py-1"
-                          style={{
-                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
-                            color: 'var(--page-primary)',
-                            borderRadius: '2px',
-                          }}
-                        >
-                          {project.tech}
-                        </span>
-                        {project.link ? (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-mono group-hover:text-[var(--page-primary)] transition-colors"
-                          >
-                            [ GitHub ] →
-                          </a>
-                        ) : (
-                          <span className="text-xs font-mono" style={{ color: 'var(--page-text-muted)' }}>
-                            [ Private ]
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          {/* Connect Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center py-16"
-          >
-            <h2 className="text-4xl font-bold mb-8">Let&apos;s Connect</h2>
-            <div className="flex justify-center gap-8 text-lg font-mono">
+            {/* Quick Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              className="flex justify-center gap-6 mt-8 terminal-text relative z-10"
+            >
               <a
                 href="https://github.com/manvirheer"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[var(--page-primary)] transition-colors"
+                className="hover:text-[var(--terminal-green)] transition-colors"
+                style={{ color: 'var(--page-text-muted)' }}
               >
                 [ GitHub ]
               </a>
@@ -340,26 +236,270 @@ export default function Home() {
                 href="https://linkedin.com/in/manvirheer"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[var(--page-primary)] transition-colors"
+                className="hover:text-[var(--terminal-cyan)] transition-colors"
+                style={{ color: 'var(--page-text-muted)' }}
               >
                 [ LinkedIn ]
               </a>
+            </motion.div>
             </div>
-          </motion.section>
+          </section>
 
-          {/* Footer Note */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center py-8 border-t"
-            style={{ borderColor: 'var(--page-border)' }}
-          >
-            <p className="text-sm" style={{ color: 'var(--page-text-muted)' }}>
-              Building v1 of this portfolio • Press <kbd className="px-2 py-1 border border-current text-xs">Cmd/Ctrl + G</kbd> for grid overlay
-            </p>
-          </motion.section>
+          {/* ============================================
+              CAREER IMPACT SECTION (Dark Background)
+              ============================================ */}
+          <section id="impact" className="section-dark py-20 md:py-28">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
+              <SectionDivider path="~/career" command="ls -la impact/" className="mb-4" />
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={fadeInUp}
+              >
+                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                  Career <span className="accent">Impact</span>
+                </h2>
+                <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
+                  Quantified wins from production systems at Tenzr Health, A2P Energy, and SaaSberry
+                </p>
+              </motion.div>
+
+              <div className="grid lg:grid-cols-3 gap-6">
+                {careerWins.map((project, index) => (
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <TerminalWindow
+                      title={`${project.company.toLowerCase().replace(/\s/g, '-')}.md`}
+                      variant="default"
+                      animate={false}
+                    >
+                      <div className="space-y-4">
+                        {/* Metric Visualization */}
+                        <AnimatedComparison
+                          before={project.metric.before}
+                          after={project.metric.after}
+                          unit={project.metric.unit}
+                          label={project.metric.label}
+                        />
+
+                        {project.secondaryMetric && (
+                          <div
+                            className="text-sm terminal-text"
+                            style={{ color: 'var(--metric-improvement)' }}
+                          >
+                            {project.secondaryMetric}
+                          </div>
+                        )}
+
+                        <div className="pt-4 border-t" style={{ borderColor: 'var(--page-border)' }}>
+                          <h3 className="font-bold text-lg mb-1">
+                            {project.title}
+                          </h3>
+                          <p
+                            className="text-sm mb-3"
+                            style={{ color: 'var(--page-primary)' }}
+                          >
+                            {project.company} • {project.year}
+                          </p>
+                          <p className="text-sm mb-4" style={{ color: 'var(--page-text-muted)' }}>{project.description}</p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {project.tech.map((t) => (
+                              <span
+                                key={t}
+                                className="text-xs px-2 py-1 rounded terminal-text"
+                                style={{
+                                  backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                                  color: 'var(--page-primary)',
+                                }}
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </TerminalWindow>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ============================================
+              PERSONAL PROJECTS SECTION (Light Background)
+              ============================================ */}
+          <section id="projects" className="py-20 md:py-28">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
+              <SectionDivider path="~/projects" command="ls -la personal/" className="mb-4" />
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={fadeInUp}
+              >
+                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                  Personal <span className="accent">Projects</span>
+                </h2>
+                <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
+                  Side projects exploring AI, systems programming, and data analysis
+                </p>
+              </motion.div>
+
+              <div className="grid lg:grid-cols-3 gap-6">
+                {personalProjects.map((project, index) => (
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="group"
+                  >
+                    <motion.div
+                      className="p-6 h-full flex flex-col bg-[var(--page-surface)] border border-[var(--page-border)] rounded-lg transition-all duration-300"
+                      whileHover={{ y: -4 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div
+                        className="text-xs terminal-text mb-3"
+                        style={{ color: 'var(--terminal-green)' }}
+                      >
+                        ~/projects/{project.title.toLowerCase().replace(/\s/g, '-')}
+                      </div>
+
+                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                      <p
+                        className="text-sm prose-accent mb-3"
+                        style={{ color: 'var(--page-primary)' }}
+                      >
+                        {project.tagline}
+                      </p>
+                      <p
+                        className="text-sm mb-6 flex-1"
+                        style={{ color: 'var(--page-text-muted)' }}
+                      >
+                        {project.description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((t) => (
+                            <span
+                              key={t}
+                              className="text-xs px-2 py-1 rounded terminal-text"
+                              style={{
+                                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                                color: 'var(--page-primary)',
+                              }}
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        {project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs terminal-text hover:text-[var(--page-primary)] transition-colors"
+                          >
+                            [ GitHub ] →
+                          </a>
+                        )}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ============================================
+              TECH STACK SECTION (Light Background)
+              ============================================ */}
+          <section id="stack" className="py-20 md:py-28">
+            <div className="max-w-6xl mx-auto px-6 md:px-10">
+              <SectionDivider path="~" command="cat requirements.txt" className="mb-4" />
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={fadeInUp}
+              >
+                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                  Tech <span className="accent">Stack</span>
+                </h2>
+                <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
+                  Tools and technologies I use to build and ship
+                </p>
+              </motion.div>
+
+              <div className="max-w-2xl">
+                <PackageManifest skills={defaultSkills} />
+              </div>
+            </div>
+          </section>
+
+          {/* ============================================
+              CONNECT SECTION (Dark Background)
+              ============================================ */}
+          <section id="connect" className="section-dark py-20 md:py-28">
+            <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
+              <SectionDivider path="~" command="./connect.sh" className="mb-4 text-left" />
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={fadeInUp}
+              >
+                <h2 className="text-4xl md:text-5xl headline-mixed mb-8">
+                  Let&apos;s <span className="accent">Connect</span>
+                </h2>
+
+                <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: 'var(--page-text-muted)' }}>
+                  I&apos;m always interested in discussing infrastructure challenges, performance
+                  optimization, or potential collaborations.
+                </p>
+
+                <div className="flex justify-center gap-8 terminal-text text-lg">
+                  <a
+                    href="https://github.com/manvirheer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[var(--page-primary)] transition-colors"
+                    style={{ color: 'var(--page-text-muted)' }}
+                  >
+                    [ GitHub ]
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/manvirheer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[var(--page-primary)] transition-colors"
+                    style={{ color: 'var(--page-text-muted)' }}
+                  >
+                    [ LinkedIn ]
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* ============================================
+              FOOTER
+              ============================================ */}
+          <TerminalStatus />
         </main>
       </div>
     </>
