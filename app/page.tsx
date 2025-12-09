@@ -128,11 +128,11 @@ export default function Home() {
       />
 
       <div className="min-h-screen pt-20">
-        <main>
+        <main className="homepage">
           {/* ============================================
               HERO SECTION
               ============================================ */}
-          <section className="relative py-24 md:py-32 text-center overflow-hidden">
+          <section className="relative py-16 md:py-24 lg:py-32 text-center overflow-hidden">
             {/* Corner gradient glow - animated soft pastel colors */}
             <motion.div
               className="absolute -top-40 -right-40 w-[1000px] h-[1000px] pointer-events-none"
@@ -177,7 +177,7 @@ export default function Home() {
 
             <div className="relative max-w-6xl mx-auto px-6 md:px-10">
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 headline-mixed relative z-10">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 headline-mixed relative z-10">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-xl md:text-2xl mb-6 relative z-10"
+              className="text-lg sm:text-xl md:text-2xl mb-6 relative z-10"
               style={{ color: 'var(--page-text-muted)' }}
             >
               Shipping <span className="prose-accent">measurable</span> performance wins
@@ -221,7 +221,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex justify-center gap-6 mt-8 terminal-text relative z-10"
+              className="flex justify-center gap-4 sm:gap-6 mt-8 terminal-text relative z-10"
             >
               <a
                 href="https://github.com/manvirheer"
@@ -248,7 +248,7 @@ export default function Home() {
           {/* ============================================
               CAREER IMPACT SECTION (Dark Background)
               ============================================ */}
-          <section id="impact" className="section-dark py-20 md:py-28">
+          <section id="impact" className="section-dark py-12 md:py-20 lg:py-28">
             <div className="max-w-6xl mx-auto px-6 md:px-10">
               <SectionDivider path="~/career" command="ls -la impact/" className="mb-4" />
 
@@ -258,7 +258,7 @@ export default function Home() {
                 viewport={{ once: true, margin: '-100px' }}
                 variants={fadeInUp}
               >
-                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl headline-mixed mb-4">
                   Career <span className="accent">Impact</span>
                 </h2>
                 <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
@@ -266,7 +266,7 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              <div className="grid lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {careerWins.map((project, index) => (
                   <motion.div
                     key={project.title}
@@ -277,28 +277,11 @@ export default function Home() {
                   >
                     <TerminalWindow
                       title={`${project.company.toLowerCase().replace(/\s/g, '-')}.md`}
-                      variant="default"
                       animate={false}
                     >
                       <div className="space-y-4">
-                        {/* Metric Visualization */}
-                        <AnimatedComparison
-                          before={project.metric.before}
-                          after={project.metric.after}
-                          unit={project.metric.unit}
-                          label={project.metric.label}
-                        />
-
-                        {project.secondaryMetric && (
-                          <div
-                            className="text-sm terminal-text"
-                            style={{ color: 'var(--metric-improvement)' }}
-                          >
-                            {project.secondaryMetric}
-                          </div>
-                        )}
-
-                        <div className="pt-4 border-t" style={{ borderColor: 'var(--page-border)' }}>
+                        {/* Project Info */}
+                        <div>
                           <h3 className="font-bold text-lg mb-1">
                             {project.title}
                           </h3>
@@ -310,7 +293,7 @@ export default function Home() {
                           </p>
                           <p className="text-sm mb-4" style={{ color: 'var(--page-text-muted)' }}>{project.description}</p>
 
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2 mb-4">
                             {project.tech.map((t) => (
                               <span
                                 key={t}
@@ -325,6 +308,25 @@ export default function Home() {
                             ))}
                           </div>
                         </div>
+
+                        {/* Metric Visualization */}
+                        <div className="pt-4 border-t" style={{ borderColor: 'var(--page-border)' }}>
+                          <AnimatedComparison
+                            before={project.metric.before}
+                            after={project.metric.after}
+                            unit={project.metric.unit}
+                            label={project.metric.label}
+                          />
+
+                          {project.secondaryMetric && (
+                            <div
+                              className="text-sm terminal-text mt-2"
+                              style={{ color: 'var(--page-text-muted)' }}
+                            >
+                              {project.secondaryMetric}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </TerminalWindow>
                   </motion.div>
@@ -336,7 +338,7 @@ export default function Home() {
           {/* ============================================
               PERSONAL PROJECTS SECTION (Light Background)
               ============================================ */}
-          <section id="projects" className="py-20 md:py-28">
+          <section id="projects" className="py-12 md:py-20 lg:py-28">
             <div className="max-w-6xl mx-auto px-6 md:px-10">
               <SectionDivider path="~/projects" command="ls -la personal/" className="mb-4" />
 
@@ -346,7 +348,7 @@ export default function Home() {
                 viewport={{ once: true, margin: '-100px' }}
                 variants={fadeInUp}
               >
-                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl headline-mixed mb-4">
                   Personal <span className="accent">Projects</span>
                 </h2>
                 <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
@@ -426,7 +428,7 @@ export default function Home() {
           {/* ============================================
               TECH STACK SECTION (Light Background)
               ============================================ */}
-          <section id="stack" className="py-20 md:py-28">
+          <section id="stack" className="py-12 md:py-20 lg:py-28">
             <div className="max-w-6xl mx-auto px-6 md:px-10">
               <SectionDivider path="~" command="cat requirements.txt" className="mb-4" />
 
@@ -436,7 +438,7 @@ export default function Home() {
                 viewport={{ once: true, margin: '-100px' }}
                 variants={fadeInUp}
               >
-                <h2 className="text-4xl md:text-5xl headline-mixed mb-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl headline-mixed mb-4">
                   Tech <span className="accent">Stack</span>
                 </h2>
                 <p className="text-lg mb-12" style={{ color: 'var(--page-text-muted)' }}>
@@ -453,7 +455,7 @@ export default function Home() {
           {/* ============================================
               CONNECT SECTION (Dark Background)
               ============================================ */}
-          <section id="connect" className="section-dark py-20 md:py-28">
+          <section id="connect" className="section-dark py-12 md:py-20 lg:py-28">
             <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
               <SectionDivider path="~" command="./connect.sh" className="mb-4 text-left" />
 
@@ -472,7 +474,7 @@ export default function Home() {
                   optimization, or potential collaborations.
                 </p>
 
-                <div className="flex justify-center gap-8 terminal-text text-lg">
+                <div className="flex justify-center gap-6 sm:gap-8 terminal-text text-base sm:text-lg">
                   <a
                     href="https://github.com/manvirheer"
                     target="_blank"

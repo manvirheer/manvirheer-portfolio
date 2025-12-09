@@ -11,16 +11,19 @@ const images = [
 ]
 
 export const FloatingParallaxImages = () => {
-  const [isMobile, setIsMobile] = useState(true)
+  const [isMobile, setIsMobile] = useState<boolean | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const checkMobile = () => setIsMobile(window.innerWidth < 1024)
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  if (isMobile) return null
+  // Don't render anything until mounted and checked
+  if (!mounted || isMobile === null || isMobile) return null
 
   const imageSize = 180
 

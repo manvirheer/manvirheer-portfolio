@@ -113,6 +113,10 @@
   --page-error: #EF4444;
   --page-code: #EC4899;
 
+  /* Metric colors */
+  --metric-before: #EF4444;
+  --metric-improvement: #10B981;
+
   /* Bento card tints (neutral in light mode) */
   --bento-blue: var(--page-surface);
   --bento-purple: var(--page-surface);
@@ -141,6 +145,9 @@ body.dark-mode {
   --page-warning: #FBBF24;
   --page-error: #F87171;
   --page-code: #F472B6;
+
+  --metric-before: #F87171;
+  --metric-improvement: #34D399;
 
   /* Dark mode gradients */
   --gradient-primary: linear-gradient(135deg, #3B82F6, #8B5CF6);
@@ -180,6 +187,9 @@ body.reading-mode {
   --page-error: #DC2626;
   --page-code: #BE185D;
 
+  --metric-before: #DC2626;
+  --metric-improvement: #059669;
+
   /* Reading mode gradients */
   --gradient-primary: linear-gradient(135deg, #2563EB, #7C3AED);
   --gradient-hero: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
@@ -206,8 +216,8 @@ body.reading-mode {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Optimal reading width for content */
-body.reading-mode main {
+/* Optimal reading width for content - exclude homepage */
+body.reading-mode main:not(.homepage) {
   max-width: 65ch;
   margin: 0 auto;
   padding: 60px 40px;
@@ -243,8 +253,8 @@ body.reading-mode h3 {
   margin-bottom: 0.5em;
 }
 
-/* Increased section spacing for breathing room */
-body.reading-mode section + section {
+/* Increased section spacing for breathing room - exclude homepage */
+body.reading-mode main:not(.homepage) section + section {
   margin-top: 64px;
 }
 
@@ -656,4 +666,30 @@ body.reading-mode .gradient-border-animated::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* =============================================================================
+   TERMINAL WINDOW COMPONENT
+   ============================================================================= */
+.terminal-window {
+  background: var(--page-surface);
+  border: 1px solid var(--page-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s var(--easingSmooth);
+}
+
+.terminal-window:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+body.dark-mode .terminal-window {
+  background: var(--color-navy-900);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .terminal-window:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
 }
