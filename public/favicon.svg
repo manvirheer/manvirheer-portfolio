@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#1A1D28"/>
+  <!-- Terminal prompt bracket -->
+  <path d="M8 10l6 6-6 6" stroke="#0066FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cursor line -->
+  <rect x="17" y="20" width="8" height="3" rx="1" fill="#4ade80"/>
+</svg>
