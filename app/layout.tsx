@@ -3,6 +3,40 @@ import { ThemeProvider } from "@/app/context/theme-context";
 import { fonts } from "@/app/config/fonts";
 import "./globals.css";
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Manvir Heer',
+  url: 'https://manvirheer.com',
+  jobTitle: 'DevOps / Infrastructure Engineer',
+  description:
+    'Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker containerization, DNS management, and HIPAA-compliant healthcare infrastructure.',
+  sameAs: [
+    'https://github.com/manvirheer',
+    'https://linkedin.com/in/manvirheer',
+  ],
+  knowsAbout: [
+    'DevOps',
+    'Infrastructure Engineering',
+    'AWS',
+    'Azure',
+    'Docker',
+    'PostgreSQL',
+    'Python',
+    'TypeScript',
+    'RAG Systems',
+    'Database Optimization',
+    'HIPAA Compliance',
+    'Performance Engineering',
+  ],
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://manvirheer.com'),
   title: {
@@ -87,6 +121,12 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${fontClasses} overflow-x-hidden`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <ThemeProvider>
         <body className="antialiased min-h-screen flex flex-col overflow-x-hidden">
           {children}
