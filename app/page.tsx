@@ -85,6 +85,14 @@ export default function Home() {
 
   const personalProjects = [
     {
+      title: 'PickMyElective',
+      tagline: 'AI-powered course recommendations',
+      description:
+        'RAG-powered system helping university students discover electives through natural language search. 3-tier microservices with semantic search over 1,200+ courses.',
+      tech: ['React', 'Spring Boot', 'FastAPI', 'ChromaDB', 'Gemini'],
+      link: 'https://github.com/manvirheer/pickmyelective',
+    },
+    {
       title: 'Whisper Typer',
       tagline: 'Voice-to-text with AMD GPU acceleration',
       description:

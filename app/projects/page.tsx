@@ -134,6 +134,52 @@ const featuredProjects = [
     ],
     ownership: 'Full-stack development + user research',
   },
+  {
+    id: 'pickmyelective',
+    title: 'PickMyElective',
+    subtitle: 'AI-Powered Course Discovery for University Students',
+    company: 'JourneyHacks 2026',
+    period: 'Jan 2026',
+    status: 'Hackathon',
+    description:
+      'RAG-powered course recommendation system that helps university students discover elective courses through natural language search. Built in 12 hours at JourneyHacks 2026 with a team of 3.',
+    problem:
+      'University students struggle to find elective courses that match their interests. Traditional course catalogs require keyword searches and manual filtering through hundreds of options, with no way to express preferences naturally.',
+    solution:
+      'Built a 3-tier microservices system with RAG-powered semantic search. Users describe courses in natural language like "easy science course with no prerequisites" and receive semantically relevant matches with personalized explanations for why each course fits.',
+    impact: [
+      'Semantic search over 1,200+ courses using ChromaDB vector database',
+      '5-step RAG pipeline: interpret → embed → search → rank → explain',
+      'Hybrid ranking: 80% semantic relevance + 20% elective quality score',
+      'Sub-second response times with rate limiting and query history',
+    ],
+    architecture: `User Query
+  → Query Interpretation (Gemini LLM)
+  → Embedding Generation (OpenAI)
+  → Vector Search (ChromaDB)
+  → Post-filtering (campus, level, WQB)
+  → Ranking (semantic + elective score)
+  → Match Reason Generation (Gemini LLM)
+  → Personalized Results`,
+    tech: [
+      'React 19',
+      'TypeScript',
+      'Spring Boot 3.4',
+      'Java 21',
+      'FastAPI',
+      'ChromaDB',
+      'OpenAI Embeddings',
+      'Google Gemini',
+      'PostgreSQL',
+      'JWT + OTP Auth',
+    ],
+    learnings: [
+      'RAG pipeline design with hybrid ranking outperforms pure semantic search',
+      'Post-filtering after vector search handles complex filter combinations efficiently',
+      'Microservices architecture enables independent scaling of AI workloads',
+    ],
+    ownership: 'Led full-stack development: RAG pipeline, backend API, and frontend UI',
+  },
 ]
 
 const sideProjects = [
