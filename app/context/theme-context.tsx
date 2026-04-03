@@ -50,6 +50,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('theme', 'light')
     }
 
+    // Remove no-transition class after initial theme is applied
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('no-transition')
+    })
+
     return () => {
       if (transitionTimer.current) {
         window.clearTimeout(transitionTimer.current)
@@ -58,17 +63,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      document.body.classList.remove('dark-mode', 'reading-mode')
+    const el = document.documentElement
+    el.classList.remove('dark-mode', 'reading-mode')
 
-      if (theme === 'dark') {
-        document.body.classList.add('dark-mode')
-      } else if (theme === 'reading') {
-        document.body.classList.add('reading-mode')
-      }
+    if (theme === 'dark') {
+      el.classList.add('dark-mode')
+    } else if (theme === 'reading') {
+      el.classList.add('reading-mode')
+    }
 
-      localStorage.setItem('theme', theme)
-    })
+    localStorage.setItem('theme', theme)
   }, [theme])
 
   return (

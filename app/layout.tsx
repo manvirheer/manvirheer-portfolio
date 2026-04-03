@@ -130,6 +130,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var theme = localStorage.getItem('theme');
+              var d = document.documentElement;
+              d.classList.add('no-transition');
+              if (theme === 'dark') d.classList.add('dark-mode');
+              else if (theme === 'reading') d.classList.add('reading-mode');
+            } catch(e) {}
+          })();
+        `}} />
       </head>
       <ThemeProvider>
         <body className="antialiased min-h-screen flex flex-col overflow-x-hidden">
