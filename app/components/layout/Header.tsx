@@ -41,8 +41,6 @@ export const Header = () => {
         backgroundColor: 'var(--page-bg)',
         borderColor: 'var(--page-border)',
       }}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
