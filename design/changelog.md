@@ -2,7 +2,66 @@
 
 All notable design decisions and iterations are documented here.
 
-## [Unreleased] - 2025-10-08
+## [2.0.0] - 2026-07-15 — Astro migration + quiet-ledger redesign
+
+The largest change so far: the site was rebuilt from the ground up and the
+earlier bento/brutalist direction (documented in the historical entries below)
+was **abandoned before it shipped**.
+
+### Framework
+**Changed:** Next.js 15 + React 19 → **Astro 5**, static output, **zero client JS**.
+**Reason:** A personal portfolio doesn't need a client runtime. Static HTML/CSS
+is faster, simpler, and cheaper to host; the only JavaScript now is a ~30-line
+inline theme toggle.
+**Impact:** Removed React, Tailwind, Framer Motion, Heroicons, and Spline.
+Styling moved to hand-written CSS with custom properties. `app/` (App Router)
+→ `src/` (Astro pages/layouts/components/content/data/styles).
+
+### Design language
+**Changed:** "bento grid + brutalist + experimental" → **quiet ledger**.
+**Reason:** The bento/brutalist concept never felt like the work. An editorial,
+document-like layout (single 820px column, hairline rules, restrained type)
+reads as calmer and more honest — closer to the plain engineer sites (Bellard,
+Hotz) that were the real reference.
+**Impact:** No cards, no bento grid, no shadows. Rules separate rows; two
+full-bleed bands (Klein-blue masthead, inverted contact) are the only fills.
+
+### Typography
+**Changed:** Host Grotesk + Playfair Display → **EB Garamond** (serif) +
+**IBM Plex Mono** (mono) + **Helvetica/Arial** (body).
+**Reason:** Serif display + mono metadata gives the ledger its voice.
+**Impact:** Fonts self-hosted via `@fontsource` (no external font requests).
+
+### Color & themes
+**Changed:** `#0066FF` accent + six pastel bento tints + **3 themes**
+(light/dark/reading) → single **Klein-blue `#2e3cf2`** accent on a warm
+near-neutral palette + **2 themes** (light/dark).
+**Reason:** One disciplined accent on ink/paper neutrals suits the ledger; a
+third "reading" mode added complexity for no real benefit.
+**Impact:** All colors are tokens on `:root` / `html.dark-mode`. Theme resolved
+before first paint (no flash), persisted to `localStorage`.
+
+### Structure & content
+**Added:** Two-page architecture — homepage (`/`) + writing (`/writing`,
+`/writing/[slug]`). Blog posts are an Astro **content collection**
+(`src/content/writing`, Zod schema); homepage lists live in `src/data/home.ts`.
+**Added:** Masthead "LATEST" ticker derived from `writing[0]`.
+**Changed:** Content/persona sharpened to **AI Infrastructure Engineer at Tenzr
+Health** with benchmarked metrics (`329ms → 2ms`, `20s → 2s`, `−40% deploy`).
+
+### Deploy & repo
+**Changed:** Deploy target is now **AWS Amplify** static build (`amplify.yml`,
+artifacts from `dist/`).
+**Removed:** Leftover Next.js artifacts (`.next/`, `next-env.d.ts`) deleted and
+added to `.gitignore`.
+
+---
+
+> **The entries below are historical.** They document the earlier
+> bento/brutalist Next.js direction that was abandoned in the 2.0.0 rebuild.
+> Kept for decision history — they no longer describe the live site.
+
+## [Superseded] - 2025-10-08
 
 ### Strategic Direction - v1 Scope
 

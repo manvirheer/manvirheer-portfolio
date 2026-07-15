@@ -1,287 +1,172 @@
-# Grid System Reference
+# Layout Reference
 
-Visual and technical reference for the 4px precision grid system.
+The concrete layout primitives of the quiet-ledger site. There is **no column
+grid and no bento** — the layout is a single narrow measure with a mono date
+gutter, hairline rules, and two full-bleed bands. This is the reference for
+building or extending a page consistently.
 
-## Foundation
+## The Measure
 
-**Base Unit:** 4px
-**Why:** Mathematical precision that creates visual harmony
+Every page centers its content in an 820px measure with 24px side padding:
 
-```
-1 unit  = 4px   = 0.25rem
-2 units = 8px   = 0.5rem
-4 units = 16px  = 1rem (base font size)
-6 units = 24px  = 1.5rem
-8 units = 32px  = 2rem
-```
-
-## Responsive Grid Layout
-
-### Mobile (0-640px)
-```
-Columns:     4
-Gutter:      16px (4 units)
-Margin:      16px (4 units)
-Container:   100%
-
-Card Layouts:
-- Full width: 4 columns
-- Half width: 2 columns
-- Stacked: 1 column each row
-```
-
-### Tablet (641-1024px)
-```
-Columns:     8
-Gutter:      20px (5 units)
-Margin:      24px (6 units)
-Container:   calc(100% - 48px)
-
-Card Layouts:
-- Featured: 4-6 columns
-- Medium:   2-3 columns
-- Small:    2 columns
-```
-
-### Desktop (1025-1440px)
-```
-Columns:     12
-Gutter:      24px (6 units)
-Margin:      40px (10 units)
-Container:   calc(100% - 80px), max 1400px
-
-Card Layouts:
-- Hero:     12 columns (full)
-- Featured: 6-8 columns
-- Medium:   3-4 columns
-- Small:    2-3 columns
-```
-
-### Wide (1441px+)
-```
-Columns:     16
-Gutter:      24px (6 units)
-Margin:      80px (20 units)
-Container:   1400px (fixed, centered)
-
-Card Layouts:
-- Similar to desktop but with more breathing room
-- Cards don't exceed 8 columns for readability
-```
-
-## Bento Card System
-
-### Card Dimensions
-All cards snap to column grid with consistent gaps.
-
-```
-Small Card (1x1):
-- Min height: 200px (50 units)
-- Aspect ratio: flexible or 1:1
-- Use: Stats, quick links, icons
-
-Medium Card (2x1 or 1x2):
-- Width: 2 columns OR Height: 2 row heights
-- Use: Project previews, featured content
-
-Large Card (2x2):
-- Spans: 2 columns × 2 row heights
-- Use: Hero content, main CTAs, featured projects
-
-Wide Card (3x1 or 4x1):
-- Spans: 3-4 columns × 1 row
-- Use: Timeline, horizontal showcases
-```
-
-### Card Spacing
-```
-Internal padding:   16px (4 units) min
-                    24px (6 units) preferred
-
-Gap between cards:  16px (4 units) mobile
-                    24px (6 units) desktop
-
-Border width:       1px (not on 4px grid, acceptable)
-Border radius:      4px (1 unit, minimal)
-```
-
-## Typography Grid Alignment
-
-All typography aligns to 4px baseline grid for vertical rhythm.
-
-```
-Line Heights (4px increments):
-- Display (61px): 68px line-height (17 units)
-- H1 (39px):      44px line-height (11 units)
-- H2 (31px):      36px line-height (9 units)
-- H3 (25px):      32px line-height (8 units)
-- Body (16px):    24px line-height (6 units)
-- Small (14px):   20px line-height (5 units)
-- Caption (12px): 16px line-height (4 units)
-
-Margins:
-- H1 bottom:      32px (8 units)
-- H2 bottom:      24px (6 units)
-- H3 bottom:      16px (4 units)
-- Paragraph:      16px (4 units)
-```
-
-## Component Grid Alignment
-
-### Buttons
-```
-Height:     44px (11 units) - touch target
-Padding:    12px 24px (3 units, 6 units)
-Gap:        8px between buttons (2 units)
-Icon size:  20px (5 units)
-```
-
-### Input Fields
-```
-Height:     44px (11 units)
-Padding:    12px 16px (3 units, 4 units)
-Margin:     16px bottom (4 units)
-Label gap:  8px (2 units)
-```
-
-### Navigation
-```
-Height:     64px (16 units)
-Padding:    16px 24px (4 units, 6 units)
-Logo:       32px (8 units) or 40px (10 units)
-Link gap:   24px (6 units)
-```
-
-### Cards
-```
-Padding:    16px (4 units) mobile
-            24px (6 units) desktop
-            32px (8 units) large cards
-
-Title:      24px bottom margin (6 units)
-Content:    16px between sections (4 units)
-```
-
-## CSS Grid Implementation
-
-### Base Grid Container
 ```css
-.bento-grid {
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+```
+
+The top nav (`.mh-nav-inner`) and the contact band (`.contactInner`) use the
+same 820px / 24px measure so all chrome lines up with the content.
+
+## The Ledger Grid
+
+Rows in Work and Writing use a two-column grid: a right-aligned **mono date
+gutter** and the content column.
+
+```css
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px; /* 6 units */
-  padding: 24px;
+  grid-template-columns: minmax(56px, 96px) 1fr;
+  column-gap: clamp(16px, 4vw, 28px);
 }
 
-/* Responsive columns */
-@media (max-width: 640px) {
-  .bento-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    padding: 16px;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: repeat(8, 1fr);
-    gap: 20px;
-    padding: 24px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .bento-grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    padding: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+.date {                 /* the gutter cell */
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  text-align: right;
+  padding-top: 22px;    /* optically aligns the date with the row title */
 }
 ```
 
-### Card Span Classes
-```css
-.span-1 { grid-column: span 1; }
-.span-2 { grid-column: span 2; }
-.span-3 { grid-column: span 3; }
-.span-4 { grid-column: span 4; }
-.span-6 { grid-column: span 6; }
-.span-8 { grid-column: span 8; }
-.span-12 { grid-column: span 12; }
+Projects reuse the same grid but leave the gutter empty (`<span></span>`) and
+put all rows in the content column.
 
-/* Row spans */
-.row-span-1 { grid-row: span 1; }
-.row-span-2 { grid-row: span 2; }
-```
+## Rows
 
-## Tailwind v4 Configuration
-
-Add to `globals.css` @theme block:
+Rows are separated by hairline rules, never boxes:
 
 ```css
-@theme {
-  /* Grid units */
-  --grid-unit: 4px;
-
-  /* Spacing scale (4px increments) */
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-5: 20px;
-  --spacing-6: 24px;
-  --spacing-8: 32px;
-  --spacing-10: 40px;
-  --spacing-12: 48px;
-  --spacing-16: 64px;
-  --spacing-20: 80px;
-  --spacing-24: 96px;
+.entry {                        /* work row */
+  border-top: 1px solid var(--rule);
+  padding: 18px 0;
 }
+.entryLast { border-bottom: 1px solid var(--rule); }  /* close the group */
 ```
 
-## Visual Testing
-
-### Grid Overlay
-For development, create a visual grid overlay:
+Row head layout (title left, metric/read-time right, wrapping gracefully):
 
 ```css
-.grid-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 0, 0, 0.1) 0px,
-      rgba(255, 0, 0, 0.1) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.1) 0px,
-      rgba(255, 0, 0, 0.1) 1px,
-      transparent 1px,
-      transparent 4px
-    );
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;              /* metric drops to its own line, never clips */
+  gap: 4px 16px;
+}
+.metric { margin-left: auto; } /* stays right-aligned after wrapping */
+```
+
+Vertical padding per row type:
+
+```
+Work rows      18px
+Project rows   13px
+Writing rows   14px
+```
+
+## Section Labels
+
+Each section opens with a mono kicker that is a real `<h2>`:
+
+```css
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--label);
+  margin: 0 0 6px;
 }
 ```
 
-Toggle with keyboard shortcut during development.
+Numbered in the copy: `01 | WORK`, `02 | PROJECTS`, `03 | WRITING`,
+`04 | CONTACT`. When a section needs an action on the right (e.g. "All writing
+→"), wrap the label in `.sectionHead` (a baseline-aligned flex row).
 
-## Quality Checklist
+## Bands (full-bleed)
 
-- [ ] All spacing uses multiples of 4px
-- [ ] Typography line heights align to 4px grid
-- [ ] Cards snap to column grid
-- [ ] Gaps consistent across breakpoints
-- [ ] Touch targets minimum 44px (11 units)
-- [ ] Container max-width respects grid
-- [ ] Responsive breakpoints tested
-- [ ] Grid overlay verified alignment
+Two full-width strips break out of the measure:
+
+- **Masthead band** (`.band` / `.bandInner`) — a Klein-blue strip above the nav
+  with the "LATEST — <title> →" ticker (from `writing[0]`) and the post date.
+  The ticker truncates with ellipsis so it never pushes the date off one line.
+- **Contact band** (`.contact` / `.contactInner`) — the inverted section closing
+  the homepage (`--contact-bg` / `--contact-ink`), holding the contact line,
+  obfuscated email, and footer links.
+
+Both bands are full-width but re-center their inner content in the 820px measure.
+
+## Top Nav
+
+```css
+.mh-nav-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+```
+
+Serif wordmark on the left; mono section links + the CSS-only theme toggle on
+the right. `SiteNav` takes `variant="home"` (in-page `#work` anchors) or
+`variant="inner"` (`/#work`, back to the homepage).
+
+## Article / Prose
+
+Posts (`/writing/[slug]`) use a slightly wider prose measure inside the 820px
+article shell:
+
+```
+Article shell   max-width 820px, padding 40px 24px 88px
+Prose measure   max-width 68ch, 16px / 1.75
+Prose headings  serif — h2 28px, h3 22px, h4 18px
+Code / pre      mono 13.5px / 13px, subtle --ink tint + --rule border
+Tables (GFM)    collapsed borders, mono headers
+```
+
+## Responsive
+
+The layout is fluid (clamps on the hero/title, `%`/`ch` measures) with a single
+hard breakpoint:
+
+```css
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }  /* gutter stacks above the row */
+  .date, .writeDate {
+    text-align: left;
+    padding-top: 0;
+    margin-top: 16px;
+  }
+  .hero { padding: 48px 0; }
+  .section { padding-bottom: 48px; }
+}
+```
+
+Below 520px the date gutter moves above each row (left-aligned) instead of being
+squeezed, and the hero/section spacing tightens.
+
+## Checklist
+
+- [ ] Content stays within the 820px measure (or is a deliberate full-bleed band).
+- [ ] Rows are separated by `1px solid var(--rule)`, not boxes or shadows.
+- [ ] Row heads use the baseline flex pattern and wrap without clipping.
+- [ ] Dates/metrics/labels are mono; titles are serif; body is sans.
+- [ ] The 520px breakpoint stacks the date gutter correctly.
+- [ ] No new client JavaScript.

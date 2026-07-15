@@ -1,304 +1,190 @@
-# Core Design Philosophy
+# Core Design — Quiet Ledger
 
 ## Vision
-A brutalist-meets-bento portfolio that feels like a precision-engineered playground. Every element snaps to an invisible grid—mathematical, intentional, but playful. Think: builder's workbench meets experimental lab.
 
-## Design Principles
+A quiet, editorial *ledger*. The site should feel like a carefully typeset
+document — a single narrow column, restrained type, hairline rules, and one blue
+accent used with discipline. Calm and legible over loud and decorative. The
+influences are the plain, high-signal personal sites of engineers like Fabrice
+Bellard and George Hotz: no chrome, no noise, the work speaks.
 
-### 1. Precision Grid System
-Everything aligns to a mathematical foundation your brain intuitively recognizes.
+Everything is static HTML and CSS. The only JavaScript is a tiny inline theme
+toggle. See [`tech-stack.md`](./tech-stack.md) for the constraints that protect
+this.
 
-**Base Unit: 4px**
-- All spacing, sizing, and positioning uses multiples of 4px
-- Creates visual harmony without being obvious
-- Ensures consistency across all screen sizes
+## Principles
 
-**Grid Structure:**
-```
-Mobile:   4-column  (16px gutter, 16px margin)
-Tablet:   8-column  (20px gutter, 24px margin)
-Desktop:  12-column (24px gutter, 40px margin)
-Wide:     16-column (24px gutter, 80px margin)
-```
+1. **One column.** All content sits in an 820px centered measure. No cards, no
+   bento grid, no sidebars.
+2. **Rules, not boxes.** Rows are separated by 1px hairline rules (`--rule`).
+   No shadows, no rounded card containers. The only filled surfaces are the
+   masthead band and the inverted contact band.
+3. **Type does the work.** Hierarchy comes from typeface, size, and weight —
+   serif for display, mono for metadata, sans for reading.
+4. **Blue is rare.** The single accent (`#2e3cf2`) appears only where it means
+   something: the masthead, benchmarked metrics, the focus ring, and the
+   link-hover swipe.
+5. **Honest content.** Metrics on the page are real and reproducible. The design
+   exists to present them plainly, not to dress them up.
+6. **Two themes, no flash.** Light and dark only, applied before first paint.
+7. **Zero client JS** on the page (bar the theme toggle).
 
-**Spacing Scale:**
-```
-xs:  4px   (0.25rem)
-sm:  8px   (0.5rem)
-md:  16px  (1rem)
-lg:  24px  (1.5rem)
-xl:  32px  (2rem)
-2xl: 48px  (3rem)
-3xl: 64px  (4rem)
-4xl: 96px  (6rem)
-```
+## Typography
 
-### 2. Bento Grid Layout
-Asymmetric card-based layout that feels modular and interactive.
+Three roles, three families:
 
-**Card Sizes (based on grid columns):**
-- Small: 1x1 (spans 1 column)
-- Medium: 2x1, 1x2 (spans 2 columns or 2 rows)
-- Large: 2x2, 3x2 (featured content)
-- Wide: 3x1, 4x1 (horizontal content)
+| Role | Family | Used for |
+|------|--------|----------|
+| **Serif** | EB Garamond Variable | Hero, section titles, project & post names, contact line |
+| **Mono** | IBM Plex Mono | Section labels/kickers, dates, metrics, nav, masthead ticker |
+| **Body** | Helvetica / Arial | Paragraphs and descriptions |
 
-**Card Behavior:**
-- Hover states that feel tactile
-- Micro-interactions on click/tap
-- Responsive reflow that maintains grid integrity
+Set via CSS custom properties:
 
-### 3. Brutalist Elements
-Raw, functional, unapologetic.
-
-**Visual Language:**
-- Exposed structure (visible borders, outlines)
-- Monospace fonts for technical elements
-- High contrast (no subtle grays)
-- Functional labels (show what things are)
-- Sharp corners (minimal border-radius)
-- Raw interactions (no overly smooth animations)
-
-**UI Patterns:**
-- Terminal-style code blocks
-- System fonts mixed with custom typography
-- Utilitarian buttons and controls
-- Information density over whitespace
-
-### 4. Experimental/Tinker Aesthetic
-Feels like an active workspace, not a finished product.
-
-**Interactive Elements:**
-- Draggable cards (optional feature)
-- Toggle states visible in UI
-- "Under construction" isn't a bug, it's a feature
-- Show version numbers, build info
-- Easter eggs and hidden interactions
-
-## Typography Scale
-
-**System:**
-- Headlines: Host Grotesk (existing)
-- Body: Host Grotesk (existing)
-- Accents: Playfair Display (for name/emphasis)
-- Code/Labels: System monospace
-
-**Scale (based on 1.25 ratio):**
-```
-xs:   12px  (0.75rem)   - labels, captions
-sm:   14px  (0.875rem)  - body small
-base: 16px  (1rem)      - body
-lg:   20px  (1.25rem)   - subheadings
-xl:   25px  (1.563rem)  - h3
-2xl:  31px  (1.953rem)  - h2
-3xl:  39px  (2.441rem)  - h1
-4xl:  49px  (3.052rem)  - display
-5xl:  61px  (3.815rem)  - hero
+```css
+--serif: 'EB Garamond Variable', Georgia, serif;
+--mono:  'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+/* body uses Helvetica, Arial, sans-serif directly on <body> */
 ```
 
-**Line Height:**
-- Headings: 1.1-1.2 (tight)
-- Body: 1.5-1.6 (readable)
-- Code: 1.4 (monospace)
+Body text is `15.5px / 1.6` with `font-variant-numeric: tabular-nums` so
+figures align in the ledger columns.
 
-## Color System
+### Sizes in use (not a rigid modular scale)
 
-### Strategy
-Bold, confident, professional. Embrace functional color with purpose.
-
-**3 Themes:**
-1. **Light** - Professional, first impressions (default)
-2. **Dark** - Focus, development, late-night browsing
-3. **Reading** - Warm, content consumption, reduced blue light
-
-### Light Mode (Default)
-Bold and confident, trustworthy professional.
-
-**Base:**
 ```
-Background:  #FFFFFF (pure white)
-Surface:     #FFFFFF (cards)
-Elevated:    #F9FAFB (slight lift)
-Border:      #000000 (brutalist strong)
-Text:        #111827 (near-black)
-Text-muted:  #374151 (gray-700)
+Hero title        clamp(34px, 6vw, 48px)  serif 500  lh 1.08  ls -0.01em
+Article title     clamp(30px, 5vw, 40px)  serif 500  lh 1.12
+Contact line      clamp(22px, 4vw, 27px)  serif
+Prose h2          28px                    serif 500
+Entry title       23px                    serif 500
+Prose h3 / article subtitle  22px / 18px  serif / sans
+Post name (home)  20px                    serif 500
+Nav name          19px                    serif 600
+Project name      18px                    serif 500
+Body / prose      15.5px / 16px           sans
+Metric            13px                    mono
+Nav links         13px                    sans
+Dates (gutter)    12px                    mono
+Project desc      12.5px                  mono
+Section label     11px  ls 0.14em         mono  (kicker, e.g. "01 | WORK")
+Masthead ticker   11px  ls 0.08em  UPPER  mono
 ```
 
-**Accents:**
-```
-Primary:     #0066FF (bold blue - trustworthy, professional)
-Success:     #10B981 (green)
-Warning:     #F59E0B (amber)
-Error:       #EF4444 (red)
-Code:        #EC4899 (pink)
-```
+Headings use tight leading (1.08–1.2) and `text-wrap: balance`; body/prose use
+`text-wrap: pretty` and constrained measures (`max-width` in `ch`).
 
-**Bento Tints (moderate pastels):**
-```
-Blue:    #DBEAFE (light blue)
-Purple:  #E9D5FF (light purple)
-Green:   #D1FAE5 (light green)
-Yellow:  #FEF3C7 (light yellow)
-Orange:  #FFEDD5 (light orange)
-Pink:    #FCE7F3 (light pink)
-```
+## Color
 
-### Dark Mode
-Foundation: #32374A (navy blue-gray)
+Two themes, driven by a `.dark-mode` class on `<html>`. All colors are tokens on
+`:root` / `html.dark-mode` — never hardcode a hex outside the token block.
 
-**Base:**
-```
-Background:  #1A1D28 (darkest navy)
-Surface:     #232732 (dark navy)
-Elevated:    #2A2F3C (medium dark navy)
-Border:      #3F4558 (softer than pure white)
-Text:        #E5E7EB (off-white, not harsh)
-Text-muted:  #9CA3AF (gray)
+### Light (default)
+
+```css
+:root {
+  --bg:          #ffffff;   /* page background */
+  --ink:         #1c1c1c;   /* primary text */
+  --muted:       #4d4d48;   /* body / secondary text */
+  --faint:       #78736a;   /* dates, captions — tuned to 4.7:1 on --bg */
+  --rule:        #f0efec;   /* hairline separators */
+  --hl:          #dfe3ff;   /* link-hover swipe + ::selection */
+  --band:        #2e3cf2;   /* Klein-blue masthead */
+  --band-ink:    #ffffff;
+  --metric:      #2e3cf2;   /* benchmarked numbers + focus ring */
+  --label:       #78736a;
+  --contact-bg:  #1c1c1c;   /* inverted contact band */
+  --contact-ink: #ffffff;
+}
 ```
 
-**Accents:**
-```
-Primary:     #3B82F6 (brighter blue for dark bg)
-Success:     #34D399 (bright green)
-Warning:     #FBBF24 (bright amber)
-Error:       #F87171 (bright red)
-Code:        #F472B6 (bright pink)
-```
+### Dark
 
-**Bento Tints (muted dark):**
-```
-Blue:    #1E3A5F (dark blue)
-Purple:  #3B2F4A (dark purple)
-Green:   #1F3D2F (dark green)
-Yellow:  #3D3420 (dark yellow)
-Orange:  #3D2A1F (dark orange)
-Pink:    #3D2432 (dark pink)
-```
-
-### Reading Mode
-Warm, sepia-inspired for long-form content.
-
-**Base:**
-```
-Background:  #FAF8F3 (lightest cream)
-Surface:     #F5F1E8 (light cream)
-Elevated:    #FFFFFF (pure white for cards)
-Border:      #5C4A3A (warm dark)
-Text:        #3D2F23 (darkest warm)
-Text-muted:  #5C4A3A (warm brown)
+```css
+html.dark-mode {
+  --bg:          #171614;
+  --ink:         #e8e5dd;
+  --muted:       #b8b4a8;
+  --faint:       #8a8579;   /* tuned to 4.9:1 on --bg */
+  --rule:        #2a2823;
+  --hl:          #28306e;
+  --band:        #2e3cf2;   /* band stays Klein blue in both themes */
+  --band-ink:    #ffffff;
+  --metric:      #98a0ff;   /* lighter blue for contrast on dark */
+  --label:       #8a8579;
+  --contact-bg:  #e8e5dd;   /* contact band inverts to light */
+  --contact-ink: #171614;
+}
 ```
 
-**Accents:**
-```
-Primary:     #2563EB (warmer blue)
-Success:     #059669 (warm green)
-Warning:     #D97706 (warm amber)
-Error:       #DC2626 (warm red)
-Code:        #BE185D (warm pink)
-```
+**Notes**
+- The palette is a warm near-neutral (ink/paper), not pure black/white. Dark
+  mode is warm charcoal `#171614`, not `#000`.
+- Only Klein blue breaks the neutral. It never fills large areas except the thin
+  masthead band.
+- Semi-transparent tints (footer text, band date) are derived with
+  `color-mix(in oklab, …)` rather than new tokens.
 
-**Bento Tints (warm pastels):**
-```
-Blue:    #DBEAFE (soft blue)
-Purple:  #F3E8FF (warm purple)
-Green:   #D1FAE5 (soft green)
-Yellow:  #FEF3C7 (warm yellow)
-Orange:  #FFEDD5 (peach)
-Pink:    #FCE7F3 (soft pink)
-```
+## Spacing & Rhythm
 
-## Animation Philosophy
+There is no strict 4px grid. Rhythm comes from generous, consistent vertical
+spacing:
 
-**Principles:**
-- Fast and snappy (100-200ms for micro-interactions)
-- Purposeful (animations explain state changes)
-- Physics-based when appropriate (spring animations for drag/drop)
-- Interruptible (user action stops animation)
-
-**Timing:**
 ```
-instant:  0ms     (immediate feedback)
-fast:     100ms   (micro-interactions)
-normal:   200ms   (standard transitions)
-slow:     400ms   (major state changes)
+Section padding-bottom   72px  (48px below 520px)
+Hero padding             72px vertical  (48px below 520px)
+Row padding (work)       18px vertical
+Row padding (projects)   13px vertical
+Row padding (writing)    14px vertical
+Contact band             56px top / 44px bottom
+Column gap (gutter)      clamp(16px, 4vw, 28px)
+Side padding (measure)   24px
 ```
 
-**Easing:**
-- Use existing curves from `app/config/motion.ts`
-- Prefer `ease-out` for UI entering viewport
-- Use `ease-in-out` for state transitions
+Rows are delimited by `border-top: 1px solid var(--rule)`; the last row in a
+group adds a matching `border-bottom`.
 
-## Responsive Strategy
+## Layout Building Blocks
 
-**Breakpoints:**
-```
-mobile:  0-640px    (bento: 2-column, stacked)
-tablet:  641-1024px (bento: 4-column, mixed)
-desktop: 1025-1440px (bento: 6-8 column, full)
-wide:    1441px+    (bento: 8-12 column, spacious)
-```
+- **Measure** — `max-width: 820px; margin: 0 auto; padding: 0 24px`.
+- **Ledger grid** — `grid-template-columns: minmax(56px, 96px) 1fr`: a
+  right-aligned mono **date gutter** and the content column.
+- **Masthead band** — full-width Klein-blue strip with a "LATEST — <title> →"
+  ticker (derived from `writing[0]`) and the post date.
+- **Contact band** — inverted full-bleed band (`--contact-bg`/`--contact-ink`)
+  closing the homepage.
+- **Top nav** — serif wordmark, mono section links, and a CSS-only theme toggle.
 
-**Grid Behavior:**
-- Mobile: Cards stack, full-width
-- Tablet: 2x2 bento starts appearing
-- Desktop: Full bento grid experience
-- Wide: Maximum 1400px container, centered
+Full specifics in [`grid-reference.md`](./grid-reference.md).
 
-## Component Patterns
+## Interaction
 
-### Bento Cards
-```
-Structure:
-- 12px padding minimum
-- Border: 1px solid black
-- Border-radius: 4px (minimal, not 0)
-- Shadow: none (brutalist) OR subtle on hover
-- Background: varies by content type
+Deliberately minimal — no motion library, no scroll animation.
 
-States:
-- Default: border black, bg white
-- Hover: slight lift OR border thickens to 2px
-- Active: background tint
-- Focus: outline offset 2px
-```
+- **Link hover:** a highlighter swipe — `background: var(--hl)`. Chrome links
+  (nav, footer, wordmark) opt out and use underline/color instead.
+- **Selection:** `::selection` uses the same `--hl`.
+- **Focus:** `outline: 2px solid var(--metric); outline-offset: 2px` — authored
+  to stay visible even on the colored bands.
+- **Theme switch:** `background-color`/`color` transition `0.3s ease`, suppressed
+  on first paint by a `.no-transition` guard.
+- **Reduced motion:** `@media (prefers-reduced-motion: reduce)` disables all
+  transitions, animations, and smooth scrolling.
 
-### Buttons
-```
-Primary:
-- Background: black
-- Text: white
-- Padding: 12px 24px (1.5 spacing scale)
-- Border: none
-- Hover: slight scale (1.02) or background #1a1a1a
+## Accessibility
 
-Secondary:
-- Background: white
-- Text: black
-- Border: 1px solid black
-- Hover: background #fafafa
+- Skip-to-content link, visible only on keyboard focus.
+- Focus rings on every interactive element, tuned to survive on colored bands.
+- `--faint` colors are nudged to meet ≥ 4.5:1 (ratios noted inline in the CSS).
+- Tap targets padded to ~35–44px (nav links, theme toggle) even where the glyph
+  is small.
+- `tabular-nums` for aligned figures; semantic headings (`h1`/`h2`/`h3`) with
+  the mono kickers as real `<h2>`s.
+- No theme flash: theme is resolved before first paint.
 
-Tertiary:
-- Background: transparent
-- Text: black
-- Border: none
-- Hover: underline
-```
+## Implementation
 
-## Implementation Notes
-
-**CSS Strategy:**
-- Continue using Tailwind v4 with @theme directive
-- Define all spacing/sizing in globals.css as custom properties
-- Use `--grid-unit: 4px` as foundation
-- Create utility classes for bento card sizes
-
-**Grid Implementation:**
-- CSS Grid for bento layout
-- Grid template columns: repeat(auto-fit, minmax(200px, 1fr))
-- Use `grid-column: span X` for card sizing
-- Gap: 16px (md spacing)
-
-**Quality Checks:**
-- Use 4px baseline grid overlay for alignment testing
-- Test all breakpoints for grid integrity
-- Ensure interactive elements have 44px minimum touch target
-- Validate color contrast ratios (WCAG AA minimum)
+- **Tokens & shared chrome:** `src/styles/global.css`
+- **Homepage & writing-index layout:** `src/styles/ledger.css`
+- **Article/prose styles:** scoped `<style>` in `src/pages/writing/[slug].astro`
+- **Theme script:** `is:inline` in `src/layouts/BaseLayout.astro`

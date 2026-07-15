@@ -16,6 +16,10 @@
 # generated types / astro cache
 /.astro/
 
+# Next.js leftovers (migrated to Astro — regenerable, never commit)
+/.next/
+next-env.d.ts
+
 # misc
 .DS_Store
 *.pem

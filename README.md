@@ -1,173 +1,147 @@
-# Manvir Heer - Portfolio Website
+# Manvir Heer — Portfolio
 
-Personal portfolio website showcasing projects, writing, and professional experience.
+Personal portfolio for Manvir Heer, AI Infrastructure Engineer at Tenzr Health.
+A small, fast, **zero-JavaScript** static site built with Astro.
 
-**Live Site:** [manvirheer.com](https://manvirheer.com)
+**Live site:** [manvirheer.com](https://manvirheer.com)
 
 ## Design Philosophy
 
-**Bento Grid + Brutalist + Experimental = Precision-Engineered Playground**
+**Quiet ledger** — an editorial, print-inspired layout in the spirit of a
+well-kept ledger. Restrained, typographic, and honest about being a document.
 
-This portfolio combines three core design principles:
-- **Bento Grid:** Asymmetric, modular card layouts with varied content hierarchy
-- **Brutalist:** High contrast, strong borders, functional over decorative, honest structure
-- **Experimental:** Builder's workbench aesthetic, shows process alongside polish
+- **Single 820px column.** No bento grid, no cards. Content sits in a narrow,
+  centered measure with a mono date gutter, like an index.
+- **Two typefaces.** EB Garamond (serif) for headings and titles; IBM Plex Mono
+  for labels, dates, and metrics. Helvetica/Arial for body copy.
+- **One accent.** Klein blue (`#2e3cf2`) — the masthead band, benchmarked
+  metrics, and the focus ring. Everything else is ink, muted, and rule-grey.
+- **Two themes.** Light and dark, toggled with a single button and applied
+  before first paint (no flash). No third "reading" mode.
+- **Rules, not boxes.** Hairline rules (`--rule`) separate rows; the contact
+  section is an inverted full-bleed band. Links get a highlighter swipe on hover.
+- **Benchmarked claims.** The numbers on the page (`329ms → 2ms`, `20s → 2s`)
+  are real and reproducible — the copy is written to earn them.
 
-**Key Features:**
-- 4px mathematical grid system (everything aligns to invisible grid)
-- Three theme modes: Light (professional), Dark (focus), Reading (warm)
-- Bold blue (#0066FF) primary accent with moderate pastel variety
-- Custom-built components (no UI libraries)
-- Fast, purposeful animations (100-400ms)
+See [`design/`](./design/) for the full design system.
 
 ## Tech Stack
 
-**Framework & Core:**
-- Next.js 15.2.3 (App Router, Turbopack)
-- React 19
-- TypeScript 5
-- Tailwind CSS v4 (using @theme directive)
+- **[Astro 5](https://astro.build)** — static output (`output: 'static'`),
+  **zero client JS** shipped
+- **TypeScript 5** (`astro/tsconfigs/strict`)
+- **Hand-written CSS** with custom properties — no Tailwind, no CSS framework
+- **Fonts:** self-hosted via `@fontsource` —
+  [EB Garamond](https://fontsource.org/fonts/eb-garamond) (variable) +
+  [IBM Plex Mono](https://fontsource.org/fonts/ibm-plex-mono)
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)**
+  for `sitemap-index.xml` with per-URL priority tiers
+- **Content collections** for writing (Markdown + typed frontmatter)
 
-**Animation & Interaction:**
-- Framer Motion 12.5.0 (centralized in `app/config/motion.ts`)
-- CSS transitions for simple states
-
-**Styling:**
-- Host Grotesk (primary typography)
-- Playfair Display (accent typography)
-- Heroicons 2.2.0 (icons)
-- Custom 4px spacing scale
-
-**Additional:**
-- Spline (3D backgrounds for project showcases)
-
-## Design Documentation
-
-Complete design system in `/design/` folder:
-
-- **[`design/README.md`](./design/README.md)** - Quick reference and overview
-- **[`design/core-design.md`](./design/core-design.md)** - Full design philosophy and principles
-- **[`design/grid-reference.md`](./design/grid-reference.md)** - Technical grid implementation guide
-- **[`design/tech-stack.md`](./design/tech-stack.md)** - Tech standards and constraints
-- **[`design/v1-plan.md`](./design/v1-plan.md)** - Implementation roadmap
-- **[`design/changelog.md`](./design/changelog.md)** - Design decisions and history
+No React, no Framer Motion, no Heroicons, no Tailwind, no Spline. The only
+JavaScript on the page is a ~30-line inline theme toggle. Everything else is
+static HTML and CSS.
 
 ## Project Structure
 
 ```
 manvirheer-portfolio/
-├── app/
+├── astro.config.mjs          # site, sitemap tiers, markdown (no syntax highlight)
+├── amplify.yml               # AWS Amplify build (baseDirectory: dist)
+├── tsconfig.json             # extends astro/tsconfigs/strict
+├── public/                   # favicons, manifest, og-image, robots.txt, hero images
+├── src/
+│   ├── layouts/
+│   │   └── BaseLayout.astro  # <head>, SEO/OG/JSON-LD, inline theme script
 │   ├── components/
-│   │   ├── layout/          # Layout components (main, yvr)
-│   │   ├── ui/              # Base UI components (to be built)
-│   │   └── home/            # Homepage-specific components (to be built)
-│   ├── config/
-│   │   ├── fonts.ts         # Font configuration
-│   │   └── motion.ts        # Framer Motion variants
-│   ├── context/
-│   │   └── theme-context.tsx # Theme state management
-│   ├── styles/
-│   │   └── globals.css      # Tailwind config, theme variables
-│   ├── yvr/                 # YVR project showcase
-│   ├── layout.tsx           # Root layout
-│   └── page.tsx             # Homepage
-├── design/                  # Design system documentation
-├── docs/                    # Additional documentation
-└── public/                  # Static assets
+│   │   └── SiteNav.astro     # shared top nav + CSS-only theme toggle
+│   ├── pages/
+│   │   ├── index.astro       # homepage: hero, work, projects, writing, contact
+│   │   └── writing/
+│   │       ├── index.astro   # writing index (from the content collection)
+│   │       └── [slug].astro  # per-post page (getStaticPaths)
+│   ├── content/
+│   │   └── writing/*.md       # blog posts (Markdown)
+│   ├── content.config.ts     # `writing` collection schema (Zod)
+│   ├── data/
+│   │   └── home.ts           # work / projects / writing arrays for the homepage
+│   └── styles/
+│       ├── global.css        # design tokens, themes, shared chrome (nav)
+│       └── ledger.css        # homepage + writing-index layout
+└── design/                   # design system documentation
 ```
 
-## Current Status
+## Architecture Notes
 
-**Phase:** Design system definition complete, beginning v1 implementation
+- **Two-page site.** The homepage (`/`) is a single scroll with in-page anchors
+  (`#work`, `#projects`, `#writing`, `#contact`). `/writing` and
+  `/writing/[slug]` are the only other routes. `SiteNav` takes a `variant`
+  (`home` uses `#work` anchors; `inner` uses `/#work` back to the homepage).
+- **Homepage content lives in `src/data/home.ts`** as plain typed arrays, not the
+  content collection — this preserves exact display strings and lets the
+  masthead "LATEST" ticker derive from `writing[0]`.
+- **Blog posts live in the `writing` content collection** (`src/content/writing/`),
+  validated by the Zod schema in `content.config.ts`. The slug is the filename.
+- **Theme** is a `.dark-mode` class on `<html>`, persisted to `localStorage`.
+  It is set by an `is:inline` script in `<head>` *before* first paint, with a
+  `.no-transition` guard, so there is no theme flash and no hydration.
 
-**v1 Goals:**
-- Establish design feel with homepage
-- Showcase 3-5 featured projects
-- About section
-- Working theme switcher
-- Responsive bento grid layout
+## Getting Started
 
-**Post-v1:**
-- Blog section
-- Book reviews page
-- Project detail pages
-- Timeline/experience section
-
-See [`design/v1-plan.md`](./design/v1-plan.md) for detailed implementation roadmap.
-
-## Other Documentation
-
-- **Routing Structure:** [`docs/Routing.md`](./docs/Routing.md)
-- **Claude Code Guide:** [`CLAUDE.md`](./CLAUDE.md)
-
-## Design Principles
-
-When building components or pages, follow these core principles:
-
-1. **4px Grid Alignment** - All spacing and sizing in multiples of 4px
-2. **Theme Variables** - Use CSS custom properties (--page-bg, --page-text, etc.)
-3. **Centralized Animations** - Define in `app/config/motion.ts`, import and reuse
-4. **Custom Components** - Build from scratch, no UI libraries
-5. **Three Theme Support** - Test in light, dark, and reading modes
-6. **Fast Animations** - 100-200ms for micro-interactions, 400ms max for major
-
-See [`design/tech-stack.md`](./design/tech-stack.md) for complete standards.
-
-## Commit Guidelines
-
-Follow these commit message conventions:
-
-- `Docs`: documentation changes
-- `Task`: build process, tools, dependencies, new features
-- `Refactor`: code refactoring without changing functionality
-- `Bug`: bug fixes
-
-**Format:** `Category: everything else in lowercase`
-
-**Examples:**
-```
-Refactor: update header animation timing
-Bug: fix theme switcher initial state
-Task: upgrade next.js to 15.2.3
-Docs: add design system documentation
-```
-
-## Development
-
-### Prerequisites
-
-- Node.js (v18 or later)
-- npm (v9 or later)
-
-### Getting Started
+Requires Node.js 18+ and npm.
 
 ```bash
-# Clone the repository
-git clone https://github.com/manvirheer/manvirheer-portfolio.git
-
-# Navigate to the project
-cd manvirheer-portfolio
-
 # Install dependencies
 npm install
 
-# Start development server (with Turbopack)
+# Start the dev server (http://localhost:4321)
 npm run dev
 
-# Build for production
+# Type-check + validate content/astro
+npm run check
+
+# Build the static site to dist/
 npm run build
 
-# Run linter
-npm run lint
+# Preview the production build locally
+npm run preview
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the development site.
+## Deployment
 
-### Available Commands
+Deployed as a static site on **AWS Amplify** (see [`amplify.yml`](./amplify.yml)):
 
-```bash
-npm run dev      # Start dev server with Turbopack
-npm run build    # Build for production
-npm start        # Start production server
-npm run lint     # Run ESLint
+- `preBuild`: `npm ci`
+- `build`: `npm run build`
+- Artifacts served from `dist/`
+
+## Writing a New Post
+
+1. Add a Markdown file to `src/content/writing/` (the filename becomes the slug).
+2. Include the frontmatter required by `content.config.ts`:
+
+   ```yaml
+   ---
+   title: "Post title"
+   subtitle: "One-line description"
+   date: 2026-01-15        # YYYY-MM-DD
+   readTime: "8 min"
+   tags: ["infra", "postgres"]
+   excerpt: "Short summary."
+   ---
+   ```
+
+3. To surface it in the homepage list and the "LATEST" masthead ticker, also add
+   an entry to the `writing` array at the top of `src/data/home.ts`.
+
+## Commit Convention
+
+The repo follows lowercase, [Conventional-Commit](https://www.conventionalcommits.org/)-style
+subjects, e.g.:
+
+```
+feat: add /trip retro road-trip itinerary
+fix: theme flash on load
+ci: add amplify.yml for Astro static output
+docs: refresh design docs after Astro migration
 ```
