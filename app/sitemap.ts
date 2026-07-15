@@ -1,45 +1,30 @@
 import { MetadataRoute } from 'next'
+import { getAllPosts } from './writing/posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://manvirheer.com'
-  const currentDate = new Date()
+  const now = new Date()
+
+  const posts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${baseUrl}/writing/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'yearly',
+    priority: 0.6,
+  }))
 
   return [
     {
       url: baseUrl,
-      lastModified: currentDate,
+      lastModified: now,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/projects`,
-      lastModified: currentDate,
+      url: `${baseUrl}/writing`,
+      lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/experience`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/writing`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
+    ...posts,
   ]
 }
