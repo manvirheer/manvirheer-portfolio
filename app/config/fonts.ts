@@ -1,22 +1,22 @@
-import { Host_Grotesk, Playfair_Display } from 'next/font/google';
+import { EB_Garamond, IBM_Plex_Mono } from 'next/font/google';
 
-export const hostGrotesk = Host_Grotesk({
+// Serif — headings, name, contact line.
+export const ebGaramond = EB_Garamond({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-host',
-  weight: ['300', '400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
+  variable: '--font-eb-garamond',
+  weight: ['400', '500', '600'],
 });
 
-export const playfairDisplay = Playfair_Display({
+// Mono — dates, section labels, metrics, project descriptions (400 only).
+export const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-playfair',
-  weight: ['400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
+  variable: '--font-ibm-plex-mono',
+  weight: ['400'],
 });
 
 export const fonts = {
-  host: hostGrotesk,
-  playfair: playfairDisplay,
+  ebGaramond,
+  ibmPlexMono,
 };

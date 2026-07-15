@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/app/context/theme-context";
 import { fonts } from "@/app/config/fonts";
 import "./globals.css";
 
@@ -8,23 +7,24 @@ const jsonLd = {
   '@type': 'Person',
   name: 'Manvir Heer',
   url: 'https://manvirheer.com',
-  jobTitle: 'DevOps / Infrastructure Engineer',
+  jobTitle: 'AI Infrastructure Engineer',
   description:
-    'Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker containerization, DNS management, and HIPAA-compliant healthcare infrastructure.',
+    'AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it. The numbers are benchmarked.',
   sameAs: [
     'https://github.com/manvirheer',
     'https://linkedin.com/in/manvirheer',
   ],
   knowsAbout: [
-    'DevOps',
-    'Infrastructure Engineering',
+    'AI Infrastructure',
+    'Kubernetes',
+    'AWS Bedrock',
+    'LLM Serving',
+    'RAG Systems',
     'AWS',
     'Azure',
-    'Docker',
     'PostgreSQL',
     'Python',
     'TypeScript',
-    'RAG Systems',
     'Database Optimization',
     'HIPAA Compliance',
     'Performance Engineering',
@@ -40,24 +40,25 @@ export const viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://manvirheer.com'),
   title: {
-    default: "Manvir Heer | DevOps / Infrastructure Engineer",
+    default: "Manvir Heer | AI Infrastructure Engineer",
     template: "%s | Manvir Heer",
   },
-  description: "Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker containerization, DNS management, and HIPAA-compliant healthcare infrastructure on AWS.",
+  description: "AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it. The numbers are benchmarked.",
   keywords: [
     "Manvir Heer",
-    "DevOps Engineer",
+    "AI Infrastructure Engineer",
     "Infrastructure Engineer",
+    "Kubernetes",
+    "AWS Bedrock",
+    "LLM Serving",
+    "RAG Systems",
     "AWS",
     "Azure",
-    "Docker",
     "PostgreSQL",
     "Python",
     "TypeScript",
-    "RAG Systems",
     "Database Optimization",
     "HIPAA Compliance",
-    "Healthcare Technology",
     "Performance Engineering",
     "Tenzr Health",
   ],
@@ -69,21 +70,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://manvirheer.com",
     siteName: "Manvir Heer",
-    title: "Manvir Heer | DevOps / Infrastructure Engineer",
-    description: "Infrastructure engineer shipping production systems at Tenzr Health. RAG applications, database optimization, Docker, DNS management, HIPAA-compliant healthcare infrastructure.",
+    title: "Manvir Heer | AI Infrastructure Engineer",
+    description: "AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Manvir Heer - DevOps / Infrastructure Engineer",
+        alt: "Manvir Heer - AI Infrastructure Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Manvir Heer | DevOps / Infrastructure Engineer",
-    description: "Infrastructure engineer at Tenzr Health. RAG systems, database optimization, Docker, HIPAA-compliant healthcare infrastructure on AWS.",
+    title: "Manvir Heer | AI Infrastructure Engineer",
+    description: "AI Infrastructure Engineer at Tenzr Health. HIPAA-compliant RAG on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -124,7 +125,7 @@ export default function RootLayout({
   const fontClasses = useFontClasses();
 
   return (
-    <html lang="en" className={`${fontClasses} overflow-x-hidden`}>
+    <html lang="en" className={`${fontClasses} overflow-x-hidden`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -132,21 +133,29 @@ export default function RootLayout({
         />
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
+            var d = document.documentElement;
             try {
-              var theme = localStorage.getItem('theme');
-              var d = document.documentElement;
               d.classList.add('no-transition');
-              if (theme === 'dark') d.classList.add('dark-mode');
-              else if (theme === 'reading') d.classList.add('reading-mode');
-            } catch(e) {}
+              if (localStorage.getItem('theme') === 'dark') d.classList.add('dark-mode');
+            } catch (e) {}
+            // enable theme transitions only after first paint
+            window.addEventListener('DOMContentLoaded', function () {
+              requestAnimationFrame(function () { d.classList.remove('no-transition'); });
+            });
+            // delegated vanilla theme toggle (no React island)
+            document.addEventListener('click', function (e) {
+              var b = e.target.closest && e.target.closest('[data-theme-toggle]');
+              if (!b) return;
+              var dark = d.classList.toggle('dark-mode');
+              try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e2) {}
+              b.setAttribute('aria-pressed', String(dark));
+            });
           })();
         `}} />
       </head>
-      <ThemeProvider>
-        <body className="antialiased min-h-screen flex flex-col overflow-x-hidden">
-          {children}
-        </body>
-      </ThemeProvider>
+      <body className="antialiased min-h-screen flex flex-col overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }
