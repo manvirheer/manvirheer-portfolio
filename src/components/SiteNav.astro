@@ -1,0 +1,61 @@
+---
+/**
+ * Shared top nav for the two-page site. Zero client JS — the theme toggle is a
+ * plain button driven by a delegated inline script (see BaseLayout.astro);
+ * icons are swapped purely with CSS on html.dark-mode.
+ * variant="home":  section links are in-page anchors (#work).
+ * variant="inner": section links point back to the homepage (/#work).
+ */
+const PUNJABI_NAME = 'ਮਨਵੀਰ ਹੀਰ';
+
+interface Props {
+  variant?: 'home' | 'inner';
+}
+
+const { variant = 'home' } = Astro.props;
+const base = variant === 'home' ? '' : '/';
+---
+
+<div class="mh-nav-inner">
+  <a href="/" class="mh-name" title={PUNJABI_NAME}>Manvir Heer</a>
+  <nav class="mh-navlinks">
+    <a href={`${base}#work`} class="mh-navlink">Work</a>
+    <a href={`${base}#projects`} class="mh-navlink">Projects</a>
+    <a href={`${base}#writing`} class="mh-navlink">Writing</a>
+    <a href={`${base}#contact`} class="mh-navcontact">Contact</a>
+    <button
+      type="button"
+      class="themeToggle"
+      data-theme-toggle
+      aria-label="Toggle light/dark theme"
+    >
+      <svg
+        class="theme-icon-moon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path>
+      </svg>
+      <svg
+        class="theme-icon-sun"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4"></circle>
+        <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+        ></path>
+      </svg>
+    </button>
+  </nav>
+</div>

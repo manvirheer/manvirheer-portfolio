@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { work, projects, writing } from '../data/home';
+import '../styles/ledger.css';
+
+const latest = writing[0];
+const PUNJABI_NAME = 'ਮਨਵੀਰ ਹੀਰ';
+---
+
+<BaseLayout>
+  <div class="page">
+    <a href="#main" class="mh-skip">Skip to content</a>
+
+    <header>
+      {/* masthead — latest post (derived from writing[0], easy to update per post) */}
+      <div class="band">
+        <div class="bandInner">
+          <a href={latest.href} class="bandLink">LATEST — {latest.title} →</a>
+          <span class="bandDate">{latest.date}</span>
+        </div>
+      </div>
+      <SiteNav variant="home" />
+    </header>
+
+    <main id="main">
+      <div class="container">
+        {/* hero */}
+        <section class="hero">
+          <h1 class="heroTitle">AI Infrastructure Engineer</h1>
+          <p class="heroText">
+            I build and run AI infrastructure at <strong>Tenzr Health</strong> in
+            Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on
+            AWS Bedrock, and the CI/CD around it. The numbers below are benchmarked.
+          </p>
+        </section>
+
+        {/* work */}
+        <section id="work" class="section" aria-labelledby="work-label">
+          <h2 id="work-label" class="label">01 | WORK</h2>
+          <div class="grid">
+            {
+              work.map((item, i) => (
+                <Fragment>
+                  <span class="date">{item.date}</span>
+                  <div class:list={['entry', { entryLast: i === work.length - 1 }]}>
+                    <div class="entryHead">
+                      <h3 class="entryTitle">{item.title}</h3>
+                      <span class="metric">{item.metric}</span>
+                    </div>
+                    <p class="entryBody">{item.body}</p>
+                  </div>
+                </Fragment>
+              ))
+            }
+          </div>
+        </section>
+
+        {/* projects */}
+        <section id="projects" class="section" aria-labelledby="projects-label">
+          <h2 id="projects-label" class="label">02 | PROJECTS</h2>
+          <div class="grid">
+            <span></span>
+            <div>
+              {
+                projects.map((project, i) => (
+                  <div
+                    class:list={[
+                      'projectRow',
+                      { projectRowLast: i === projects.length - 1 },
+                    ]}
+                  >
+                    {project.href ? (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="projectName"
+                      >
+                        {project.name}
+                      </a>
+                    ) : (
+                      <span class="projectName">{project.name}</span>
+                    )}
+                    <span class="projectDesc">{project.desc}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        {/* writing */}
+        <section id="writing" class="section" aria-labelledby="writing-label">
+          <div class="sectionHead">
+            <h2 id="writing-label" class="label">03 | WRITING</h2>
+            <a href="/writing" class="allLink">All writing →</a>
+          </div>
+          <div class="grid">
+            {
+              writing.map((post, i) => (
+                <Fragment>
+                  <span class="writeDate">{post.date}</span>
+                  <div
+                    class:list={['writeEntry', { writeEntryLast: i === writing.length - 1 }]}
+                  >
+                    <div class="writeHead">
+                      <a href={post.href} class="writeTitle">
+                        {post.title}
+                      </a>
+                      <span class="writeRead">{post.readTime}</span>
+                    </div>
+                    <p class="writeSub">{post.subtitle}</p>
+                  </div>
+                </Fragment>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+    </main>
+
+    {/* contact — inverted full-bleed band */}
+    <section id="contact" class="contact" aria-labelledby="contact-label">
+      <div class="contactInner">
+        <h2 id="contact-label" class="contactLabel">04 | CONTACT</h2>
+        <p class="contactLine">
+          If you want to talk about infrastructure or performance work, reach me at{' '}
+          <span class="email">hi [@] manvirheer [.] com</span>.
+        </p>
+        <footer class="footer">
+          <a
+            href="https://github.com/manvirheer"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footerLink"
+          >
+            github
+          </a>
+          <a
+            href="https://linkedin.com/in/manvirheer"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footerLink"
+          >
+            linkedin
+          </a>
+          <span class="copyright" title={PUNJABI_NAME}>© 2026 Manvir Heer</span>
+        </footer>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

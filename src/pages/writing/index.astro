@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import '../../styles/ledger.css';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => +new Date(b.data.date) - +new Date(a.data.date)
+);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Notes on AI infrastructure, performance, and lessons from shipping production systems."
+>
+  <div class="page">
+    <a href="#main" class="mh-skip">Skip to content</a>
+
+    <header>
+      <SiteNav variant="inner" />
+    </header>
+
+    <main id="main">
+      <div class="container">
+        <section class="hero">
+          <h1 class="heroTitle">Writing</h1>
+          <p class="heroText">
+            Notes on AI infrastructure, performance, and lessons from shipping
+            production systems. Plain and practical.
+          </p>
+        </section>
+
+        <section class="section" aria-label="All posts">
+          <div class="grid">
+            {
+              posts.map((post, i) => (
+                <Fragment>
+                  <span class="writeDate">{post.data.date.replace(/-/g, '.')}</span>
+                  <div
+                    class:list={['writeEntry', { writeEntryLast: i === posts.length - 1 }]}
+                  >
+                    <div class="writeHead">
+                      <a href={`/writing/${post.id}`} class="writeTitle">
+                        {post.data.title}
+                      </a>
+                      <span class="writeRead">{post.data.readTime}</span>
+                    </div>
+                    <p class="writeSub">{post.data.subtitle}</p>
+                  </div>
+                </Fragment>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

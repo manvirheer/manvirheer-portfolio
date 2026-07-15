@@ -1,0 +1,142 @@
+---
+import '@fontsource-variable/eb-garamond';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const DEFAULT_DESCRIPTION =
+  'AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it. The numbers are benchmarked.';
+
+const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
+const fullTitle = title ? `${title} | Manvir Heer` : 'Manvir Heer | AI Infrastructure Engineer';
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
+
+const keywords = [
+  'Manvir Heer',
+  'AI Infrastructure Engineer',
+  'Infrastructure Engineer',
+  'Kubernetes',
+  'AWS Bedrock',
+  'LLM Serving',
+  'RAG Systems',
+  'AWS',
+  'Azure',
+  'PostgreSQL',
+  'Python',
+  'TypeScript',
+  'Database Optimization',
+  'HIPAA Compliance',
+  'Performance Engineering',
+  'Tenzr Health',
+].join(', ');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Manvir Heer',
+  url: 'https://manvirheer.com',
+  jobTitle: 'AI Infrastructure Engineer',
+  description:
+    'AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it. The numbers are benchmarked.',
+  sameAs: ['https://github.com/manvirheer', 'https://linkedin.com/in/manvirheer'],
+  knowsAbout: [
+    'AI Infrastructure',
+    'Kubernetes',
+    'AWS Bedrock',
+    'LLM Serving',
+    'RAG Systems',
+    'AWS',
+    'Azure',
+    'PostgreSQL',
+    'Python',
+    'TypeScript',
+    'Database Optimization',
+    'HIPAA Compliance',
+    'Performance Engineering',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Manvir Heer" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Manvir Heer" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Manvir Heer - AI Infrastructure Engineer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Icons + manifest -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- structured data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- theme: applied before first paint, no framework. Must be is:inline so it
+         is not bundled/deferred (which would defeat the flash guard). -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        try {
+          d.classList.add('no-transition');
+          if (localStorage.getItem('theme') === 'dark') d.classList.add('dark-mode');
+        } catch (e) {}
+        // enable theme transitions only after first paint
+        window.addEventListener('DOMContentLoaded', function () {
+          requestAnimationFrame(function () {
+            d.classList.remove('no-transition');
+          });
+        });
+        // delegated vanilla theme toggle (no island)
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest && e.target.closest('[data-theme-toggle]');
+          if (!b) return;
+          var dark = d.classList.toggle('dark-mode');
+          try {
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+          } catch (e2) {}
+          b.setAttribute('aria-pressed', String(dark));
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
