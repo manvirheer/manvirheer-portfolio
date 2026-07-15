@@ -10,15 +10,11 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# build output
+/dist/
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# generated types / astro cache
+/.astro/
 
 # misc
 .DS_Store
@@ -34,9 +30,5 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
-
 # typescript
 *.tsbuildinfo
-next-env.d.ts

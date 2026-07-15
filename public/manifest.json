@@ -1,11 +1,11 @@
 {
-  "name": "Manvir Heer - DevOps / Infrastructure Engineer",
+  "name": "Manvir Heer - AI Infrastructure Engineer",
   "short_name": "Manvir Heer",
-  "description": "Infrastructure engineer shipping production systems. RAG applications, database optimization, Docker, and HIPAA-compliant healthcare infrastructure.",
+  "description": "AI Infrastructure Engineer at Tenzr Health in Vancouver: a HIPAA-compliant RAG platform on Kubernetes, LLM serving on AWS Bedrock, and the CI/CD around it.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1A1D28",
-  "theme_color": "#0066FF",
+  "background_color": "#ffffff",
+  "theme_color": "#2e3cf2",
   "icons": [
     {
       "src": "/favicon.svg",
